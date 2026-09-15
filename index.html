@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>JOKER ANALYSIS</title>
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#050505;color:#f4f4f4}
+body:before{content:"";position:fixed;inset:0;pointer-events:none;background:radial-gradient(circle at 15% 8%,#39ff1425,transparent 28%),radial-gradient(circle at 90% 85%,#39ff1415,transparent 34%)}
+header{padding:18px 6%;border-bottom:1px solid #39ff1450;position:sticky;top:0;background:#050505ee;backdrop-filter:blur(12px);z-index:10}
+.top{display:flex;align-items:center;justify-content:space-between}.logo{font-size:21px;font-weight:900;letter-spacing:1.8px;color:#39ff14;text-shadow:0 0 14px #39ff14}.menu{font-size:27px;color:#39ff14;display:none}
+nav{display:flex;gap:22px;margin-top:15px}nav a{color:#ddd;text-decoration:none;font-weight:800}nav a:hover{color:#39ff14}
+.hero{min-height:54vh;display:grid;place-items:center;text-align:center;padding:65px 6%}.tag{color:#39ff14;font-size:12px;font-weight:900;letter-spacing:1.2px}.hero h1{font-size:clamp(45px,10vw,100px);line-height:.92;margin:12px 0;color:#39ff14;text-shadow:0 0 10px #39ff14,0 0 45px #39ff1460}.hero p{color:#aaa;font-size:18px;max-width:650px;line-height:1.5}.btn{border:1px solid #39ff14;background:#39ff14;color:#050505;border-radius:9px;padding:12px 18px;font-weight:900;cursor:pointer;text-decoration:none;display:inline-block}.ghost{background:#101010;color:#39ff14}
+section{max-width:1120px;margin:auto;padding:50px 6%}h2{font-size:30px;margin:0 0 22px}h2 span{color:#39ff14}
+.filters{display:flex;gap:8px;overflow:auto;padding-bottom:15px;margin-bottom:10px}.filter{white-space:nowrap;border:1px solid #333;background:#0d0d0d;color:#bbb;padding:9px 13px;border-radius:99px;cursor:pointer}.filter.active,.filter:hover{border-color:#39ff14;color:#39ff14}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(285px,1fr));gap:17px}.card{background:#0c0c0c;border:1px solid #39ff143d;border-radius:15px;padding:20px;box-shadow:0 0 24px #000;position:relative}.card:hover{border-color:#39ff14}.sport{font-weight:900;color:#39ff14}.card h3{font-size:22px;margin:9px 0}.meta{color:#777;font-size:13px}.preview{color:#aaa;line-height:1.5;margin:16px 0;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}.confidence{font-weight:900;color:#9cff78;margin:12px 0}.result{font-weight:900;margin:8px 0}.win{color:#39ff14}.loss{color:#ff7070}.pending{color:#ffd86b}.card-actions{display:flex;gap:8px;flex-wrap:wrap}.small{padding:9px 12px;font-size:12px}.danger{border-color:#ff7070;background:#101010;color:#ff7070}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.stat{background:#0b0b0b;border:1px solid #222;border-radius:13px;padding:18px;text-align:center}.stat b{display:block;color:#39ff14;font-size:28px;margin-bottom:5px}
+.form{background:#0b0b0b;border:1px solid #39ff1445;border-radius:15px;padding:22px}.formgrid{display:grid;grid-template-columns:1fr 1fr;gap:14px}label{display:block;font-size:12px;color:#bbb;font-weight:800;margin-bottom:6px}input,select,textarea{width:100%;background:#151515;border:1px solid #333;color:#fff;border-radius:8px;padding:12px;font:inherit}textarea{min-height:145px;resize:vertical}.full{grid-column:1/-1}.notice{font-size:13px;color:#888;line-height:1.5}.success{display:none;color:#39ff14;font-weight:900;margin:12px 0}
+.modal{display:none;position:fixed;inset:0;background:#000c;z-index:30;padding:20px;overflow:auto}.modalbox{max-width:760px;margin:5vh auto;background:#0b0b0b;border:1px solid #39ff14;border-radius:16px;padding:24px;box-shadow:0 0 40px #39ff1430}.close{float:right;color:#39ff14;font-size:28px;cursor:pointer}.modaltext{color:#bbb;white-space:pre-line;line-height:1.7}
+footer{text-align:center;color:#666;padding:35px;border-top:1px solid #222;margin-top:30px}
+@media(max-width:700px){.top{align-items:center}.menu{display:block}nav{display:none;flex-wrap:wrap;gap:15px}.stats{grid-template-columns:1fr 1fr}.formgrid{grid-template-columns:1fr}.full{grid-column:auto}.hero{min-height:50vh}}
+</style>
+</head>
+<body>
+<header><div class="top"><div class="logo">🃏 JOKER ANALYSIS</div><div class="menu" onclick="toggleNav()">☰</div></div><nav id="nav"><a href="#analyses">Analyses</a><a href="#ajouter">+ Publier</a><a href="#stats">Stats</a><a href="#apropos">À propos</a></nav></header>
+
+<section class="hero"><div><div class="tag">SPORT • DATA • ANALYSE</div><h1>JOKER<br>ANALYSIS</h1><p>Analyses sportives, statistiques et suivi personnel dans ton univers noir & vert fluo.</p><a class="btn" href="#ajouter">+ PUBLIER UNE ANALYSE</a></div></section>
+
+<section id="analyses"><h2>Dernières <span>analyses</span></h2>
+<div class="filters" id="filters"><button class="filter active" onclick="setFilter('Tous',this)">Tous</button><button class="filter" onclick="setFilter('⚽ Football',this)">⚽ Football</button><button class="filter" onclick="setFilter('🏉 Rugby',this)">🏉 Rugby</button><button class="filter" onclick="setFilter('⚾ Baseball',this)">⚾ Baseball</button><button class="filter" onclick="setFilter('🏒 Hockey',this)">🏒 Hockey</button><button class="filter" onclick="setFilter('🎾 Tennis',this)">🎾 Tennis</button></div>
+<div id="posts" class="grid"></div></section>
+
+<section id="ajouter"><h2>Publier une <span>analyse</span></h2><div class="form">
+<p class="notice">Crée une publication. Elle est enregistrée dans le navigateur de cet appareil. Le statut peut ensuite être modifié en « Réussie », « Ratée » ou rester « En attente ».</p>
+<div class="formgrid">
+<div><label>Sport</label><select id="sport"><option>⚽ Football</option><option>🏉 Rugby</option><option>⚾ Baseball</option><option>🏒 Hockey</option><option>🎾 Tennis</option><option>🏀 Basket</option><option>🏎️ Autre</option></select></div>
+<div><label>Match / événement</label><input id="match" placeholder="Ex : Équipe A - Équipe B"></div>
+<div><label>Titre</label><input id="title" placeholder="Ex : Une affiche à surveiller"></div>
+<div><label>Date</label><input id="date" type="date"></div>
+<div><label>Confiance</label><select id="confidence"><option>🟢🟢🟢 Forte</option><option>🟢🟢 Moyenne</option><option>🟢 Faible</option></select></div>
+<div><label>Catégorie</label><input id="category" placeholder="Forme / statistiques / tendance"></div>
+<div class="full"><label>Analyse</label><textarea id="analysis" placeholder="Écris ton analyse ici..."></textarea></div>
+</div><div id="success" class="success">✅ Publication ajoutée.</div><div style="margin-top:15px;display:flex;gap:9px;flex-wrap:wrap"><button class="btn" onclick="addPost()">PUBLIER</button><button class="btn ghost" onclick="clearForm()">EFFACER</button></div>
+</div></section>
+
+<section id="stats"><h2>Mes <span>statistiques</span></h2><div class="stats"><div class="stat"><b id="count">0</b>Analyses</div><div class="stat"><b id="successCount">0</b>Réussies</div><div class="stat"><b id="rate">—</b>Taux de réussite</div><div class="stat"><b id="sports">0</b>Sports</div></div></section>
+<section id="apropos"><h2>À <span>propos</span></h2><div class="card"><p class="preview" style="-webkit-line-clamp:unset">Bienvenue sur JOKER ANALYSIS. Un espace personnel consacré à l'analyse sportive, aux statistiques et au suivi des résultats.</p></div></section>
+<footer>🃏 JOKER ANALYSIS • Analyse sportive & statistiques</footer>
+
+<div class="modal" id="modal"><div class="modalbox"><span class="close" onclick="closeModal()">×</span><div id="modalContent"></div></div></div>
+
+<script>
+const KEY="jokerAnalysisPostsV3";let posts=JSON.parse(localStorage.getItem(KEY)||"[]"), currentFilter="Tous";
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+function resultLabel(r){return r==="win"?'<div class="result win">✓ RÉUSSIE</div>':r==="loss"?'<div class="result loss">✕ RATÉE</div>':'<div class="result pending">◌ EN ATTENTE</div>'}
+function render(){
+ let list=currentFilter==="Tous"?posts:posts.filter(p=>p.sport===currentFilter);let box=document.getElementById("posts");
+ if(!list.length){box.innerHTML='<div class="card"><div class="meta">Aucune publication dans cette catégorie.</div></div>'}
+ else box.innerHTML=list.slice().reverse().map(p=>{
+ let idx=posts.indexOf(p);
+ return `<article class="card"><div class="sport">${esc(p.sport)} • ${esc(p.category||"ANALYSE")}</div><h3>${esc(p.title||p.match)}</h3><div class="meta">${esc(p.date||"Date non précisée")} — ${esc(p.match)}</div><p class="preview">${esc(p.analysis)}</p>${resultLabel(p.result)}<div class="confidence">${esc(p.confidence)}</div><div class="card-actions"><button class="btn small" onclick="openPost(${idx})">LIRE L'ANALYSE</button><button class="btn small ghost" onclick="cycleResult(${idx})">STATUT</button><button class="btn small danger" onclick="removePost(${idx})">SUPPRIMER</button></div></article>`}).join("");
+ updateStats();
+}
+function addPost(){
+ let match=document.getElementById("match").value.trim(),analysis=document.getElementById("analysis").value.trim();
+ if(!match||!analysis){alert("Ajoute au minimum le match/événement et ton analyse.");return}
+ posts.push({sport:sport.value,match,title:title.value.trim(),date:date.value,confidence:confidence.value,category:category.value.trim(),analysis,result:"pending"});
+ localStorage.setItem(KEY,JSON.stringify(posts));clearForm();render();document.getElementById("success").style.display="block";setTimeout(()=>success.style.display="none",2200);location.hash="analyses";
+}
+function cycleResult(i){posts[i].result=posts[i].result==="pending"?"win":posts[i].result==="win"?"loss":"pending";localStorage.setItem(KEY,JSON.stringify(posts));render()}
+function removePost(i){if(confirm("Supprimer cette analyse ?")){posts.splice(i,1);localStorage.setItem(KEY,JSON.stringify(posts));render()}}
+function openPost(i){let p=posts[i];modalContent.innerHTML=`<div class="sport">${esc(p.sport)} • ${esc(p.category||"ANALYSE")}</div><h2>${esc(p.title||p.match)}</h2><div class="meta">${esc(p.date||"Date non précisée")} — ${esc(p.match)}</div>${resultLabel(p.result)}<div class="confidence">${esc(p.confidence)}</div><div class="modaltext">${esc(p.analysis)}</div>`;modal.style.display="block"}
+function closeModal(){modal.style.display="none"}window.onclick=e=>{if(e.target===modal)closeModal()}
+function setFilter(f,b){currentFilter=f;document.querySelectorAll(".filter").forEach(x=>x.classList.remove("active"));b.classList.add("active");render()}
+function updateStats(){let done=posts.filter(p=>p.result!=="pending"),wins=posts.filter(p=>p.result==="win");count.textContent=posts.length;successCount.textContent=wins.length;rate.textContent=done.length?Math.round(wins.length/done.length*100)+"%":"—";sports.textContent=new Set(posts.map(p=>p.sport)).size}
+function clearForm(){["match","title","date","category","analysis"].forEach(id=>document.getElementById(id).value="")}
+function toggleNav(){nav.style.display=nav.style.display==="flex"?"none":"flex"}render();
+</script>
+</body>
+</html>

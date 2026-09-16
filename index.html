@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>BETJOKER</title>
+  <title>BETJOKER — Analyses sportives</title>
 
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="config.js"></script>
@@ -18,118 +18,134 @@
 
     body {
       background: #050505;
-      color: white;
+      color: #fff;
       font-family: Arial, Helvetica, sans-serif;
       min-height: 100vh;
     }
 
+    /* HEADER */
     header {
       position: relative;
-      padding: 28px 20px 20px;
       text-align: center;
-      border-bottom: 1px solid rgba(57,255,20,0.2);
-    }
-
-    h1 {
-      color: #39ff14;
-      font-size: 42px;
-      letter-spacing: 4px;
-      font-weight: 900;
-      text-shadow: 0 0 15px rgba(57,255,20,0.35);
-    }
-
-    .subtitle {
-      margin-top: 6px;
-      color: #aaa;
-      font-size: 13px;
-      letter-spacing: 1px;
-    }
-
-    #menuButton {
-      position: absolute;
-      left: 18px;
-      top: 28px;
-      background: transparent;
-      border: none;
-      color: #39ff14;
-      font-size: 28px;
-      cursor: pointer;
+      padding: 35px 20px 25px;
+      border-bottom: 1px solid rgba(57, 255, 20, 0.25);
     }
 
     .admin-link {
       position: absolute;
+      top: 15px;
       right: 18px;
-      top: 31px;
       color: #777;
-      font-size: 10px;
       text-decoration: none;
+      font-size: 11px;
       letter-spacing: 1px;
+      transition: 0.2s;
     }
 
     .admin-link:hover {
       color: #39ff14;
     }
 
-    #menu {
-      display: none;
-      background: #0b0b0b;
-      border-bottom: 1px solid rgba(57,255,20,0.25);
-      padding: 12px;
+    .menu-button {
+      position: absolute;
+      top: 15px;
+      left: 18px;
+      background: none;
+      border: none;
+      color: #39ff14;
+      font-size: 25px;
+      cursor: pointer;
     }
 
-    #menu.open {
+    .logo {
+      color: #39ff14;
+      font-size: 42px;
+      font-weight: 900;
+      letter-spacing: 4px;
+      text-shadow:
+        0 0 5px #39ff14,
+        0 0 15px rgba(57, 255, 20, 0.6);
+    }
+
+    .subtitle {
+      margin-top: 8px;
+      color: #aaa;
+      font-size: 13px;
+      letter-spacing: 1px;
+    }
+
+    /* MENU */
+    .sport-menu {
+      display: none;
+      position: absolute;
+      z-index: 20;
+      top: 55px;
+      left: 15px;
+      width: 210px;
+      background: #0b0b0b;
+      border: 1px solid #39ff14;
+      box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .sport-menu.active {
       display: block;
     }
 
-    .sport-button {
+    .sport-menu button {
       display: block;
       width: 100%;
-      max-width: 500px;
-      margin: 7px auto;
-      padding: 12px 15px;
-      background: #101010;
-      border: 1px solid #222;
-      border-radius: 8px;
-      color: #ccc;
-      cursor: pointer;
+      padding: 13px 15px;
+      background: transparent;
+      color: #ddd;
+      border: none;
+      border-bottom: 1px solid #191919;
       text-align: left;
+      cursor: pointer;
       font-size: 13px;
     }
 
-    .sport-button:hover,
-    .sport-button.active {
-      border-color: #39ff14;
+    .sport-menu button:hover,
+    .sport-menu button.active {
+      background: rgba(57, 255, 20, 0.08);
       color: #39ff14;
-      background: #0d160c;
     }
 
+    /* CONTENT */
     main {
       width: 100%;
-      max-width: 850px;
+      max-width: 900px;
       margin: auto;
-      padding: 25px 15px 50px;
+      padding: 30px 15px 50px;
     }
 
-    #filter {
+    .section-title {
       color: #39ff14;
-      font-size: 12px;
+      font-size: 18px;
       font-weight: bold;
+      margin-bottom: 20px;
       letter-spacing: 1px;
-      margin-bottom: 15px;
+    }
+
+    /* CARDS */
+    .posts {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
     }
 
     .post {
       background: #0c0c0c;
       border: 1px solid #202020;
-      border-radius: 12px;
-      padding: 18px;
-      margin-bottom: 16px;
-      transition: 0.2s;
+      border-left: 3px solid #39ff14;
+      border-radius: 8px;
+      padding: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
     }
 
     .post:hover {
-      border-color: rgba(57,255,20,0.5);
-      box-shadow: 0 0 18px rgba(57,255,20,0.08);
+      border-color: rgba(57, 255, 20, 0.55);
     }
 
     .post-top {
@@ -142,99 +158,126 @@
 
     .sport {
       color: #39ff14;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: bold;
+      text-transform: uppercase;
       letter-spacing: 1px;
-    }
-
-    .category {
-      color: #777;
-      font-size: 10px;
-    }
-
-    .post h2 {
-      font-size: 21px;
-      margin-bottom: 6px;
-    }
-
-    .match {
-      color: #ddd;
-      font-size: 14px;
-      margin-bottom: 5px;
     }
 
     .date {
-      color: #777;
+      color: #666;
       font-size: 11px;
-      margin-bottom: 14px;
     }
 
-    .analysis {
-      color: #bdbdbd;
-      line-height: 1.6;
+    .match {
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 8px;
+    }
+
+    .title {
+      color: #39ff14;
       font-size: 14px;
-      white-space: pre-wrap;
+      font-weight: bold;
+      margin-bottom: 15px;
+    }
+
+    .info {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 15px;
+    }
+
+    .badge {
+      border: 1px solid #292929;
+      background: #111;
+      padding: 5px 9px;
+      border-radius: 4px;
+      color: #aaa;
+      font-size: 11px;
     }
 
     .confidence {
-      margin-top: 15px;
       color: #39ff14;
-      font-size: 13px;
     }
 
-    .confidence strong {
-      color: #aaa;
-      margin-right: 6px;
+    .analysis {
+      color: #ccc;
+      font-size: 14px;
+      line-height: 1.65;
+      white-space: pre-line;
     }
 
-    .more-button {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      margin-top: 18px;
-      padding: 9px 14px;
-      border: 1px solid #39ff14;
-      border-radius: 7px;
-      color: #39ff14;
-      text-decoration: none;
+    .result {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 6px 10px;
+      border-radius: 4px;
       font-size: 11px;
       font-weight: bold;
-      letter-spacing: 1px;
-      transition: 0.2s;
+      text-transform: uppercase;
     }
 
-    .more-button:hover {
-      background: #39ff14;
-      color: #050505;
-      box-shadow: 0 0 12px rgba(57,255,20,0.35);
+    .result.pending {
+      color: #aaa;
+      border: 1px solid #333;
+      background: #111;
     }
 
+    .result.win {
+      color: #39ff14;
+      border: 1px solid rgba(57, 255, 20, 0.4);
+      background: rgba(57, 255, 20, 0.08);
+    }
+
+    .result.loss {
+      color: #ff4b4b;
+      border: 1px solid rgba(255, 75, 75, 0.35);
+      background: rgba(255, 75, 75, 0.08);
+    }
+
+    /* LOADING / EMPTY */
     .message {
       text-align: center;
-      padding: 45px 15px;
+      padding: 40px 15px;
       color: #777;
       font-size: 14px;
     }
 
-    .error {
-      color: #ff5555;
+    .loading {
+      color: #39ff14;
     }
 
+    /* MOBILE */
     @media (max-width: 600px) {
-      h1 {
-        font-size: 32px;
+      header {
+        padding-top: 40px;
       }
 
-      .admin-link {
-        display: none;
+      .logo {
+        font-size: 32px;
+        letter-spacing: 3px;
+      }
+
+      .subtitle {
+        font-size: 11px;
       }
 
       main {
-        padding-top: 20px;
+        padding-top: 25px;
       }
 
-      .post h2 {
-        font-size: 19px;
+      .post {
+        padding: 16px;
+      }
+
+      .match {
+        font-size: 18px;
+      }
+
+      .analysis {
+        font-size: 13px;
       }
     }
   </style>
@@ -242,269 +285,240 @@
 
 <body>
 
-<header>
+  <header>
 
-  <button id="menuButton">☰</button>
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
 
-  <a href="admin.html" class="admin-link">
-    ESPACE ADMIN
-  </a>
+    <a href="admin.html" class="admin-link">ESPACE ADMIN</a>
 
-  <h1>BETJOKER</h1>
+    <div class="sport-menu" id="sportMenu">
+      <button class="active" onclick="filterSport('Toutes les analyses', this)">
+        Toutes les analyses
+      </button>
 
-  <div class="subtitle">
-    Analyses et statistiques sportives
-  </div>
+      <button onclick="filterSport('Football', this)">
+        ⚽ Football
+      </button>
 
-</header>
+      <button onclick="filterSport('Basketball', this)">
+        🏀 Basketball
+      </button>
 
-<nav id="menu">
+      <button onclick="filterSport('Tennis', this)">
+        🎾 Tennis
+      </button>
 
-  <button class="sport-button active" data-sport="all">
-    Toutes les analyses
-  </button>
+      <button onclick="filterSport('Hockey', this)">
+        🏒 Hockey
+      </button>
 
-  <button class="sport-button" data-sport="Football">
-    ⚽ Football
-  </button>
-
-  <button class="sport-button" data-sport="Basketball">
-    🏀 Basketball
-  </button>
-
-  <button class="sport-button" data-sport="Tennis">
-    🎾 Tennis
-  </button>
-
-  <button class="sport-button" data-sport="Hockey">
-    🏒 Hockey
-  </button>
-
-  <button class="sport-button" data-sport="Rugby">
-    🏉 Rugby
-  </button>
-
-</nav>
-
-<main>
-
-  <div id="filter">
-    TOUTES LES ANALYSES
-  </div>
-
-  <section id="posts">
-    <div class="message">
-      Chargement des analyses...
+      <button onclick="filterSport('Rugby', this)">
+        🏉 Rugby
+      </button>
     </div>
-  </section>
 
-</main>
+    <div class="logo">BETJOKER</div>
 
-<script>
+    <div class="subtitle">
+      Analyses et statistiques sportives
+    </div>
 
-  const db = supabase.createClient(
-    window.SUPABASE_URL,
-    window.SUPABASE_ANON_KEY
-  );
+  </header>
 
-  let posts = [];
-  let selectedSport = "all";
+  <main>
 
-  const menuButton = document.getElementById("menuButton");
-  const menu = document.getElementById("menu");
-  const postsContainer = document.getElementById("posts");
-  const filter = document.getElementById("filter");
+    <div class="section-title" id="sectionTitle">
+      DERNIÈRES ANALYSES
+    </div>
 
-  menuButton.onclick = function() {
-    menu.classList.toggle("open");
-  };
+    <div class="posts" id="posts">
+      <div class="message loading">
+        Chargement des analyses...
+      </div>
+    </div>
 
-  const buttons = document.querySelectorAll(".sport-button");
+  </main>
 
-  buttons.forEach(function(button) {
+  <script>
+    const supabaseClient = window.supabase.createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_ANON_KEY
+    );
 
-    button.onclick = function() {
+    let allPosts = [];
+    let currentSport = "Toutes les analyses";
 
-      selectedSport = button.getAttribute("data-sport");
+    function toggleMenu() {
+      document
+        .getElementById("sportMenu")
+        .classList.toggle("active");
+    }
 
-      buttons.forEach(function(btn) {
-        btn.classList.remove("active");
+    function escapeHtml(value) {
+      if (value === null || value === undefined) return "";
+
+      return String(value)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    function formatDate(date) {
+      if (!date) return "";
+
+      const d = new Date(date + "T00:00:00");
+
+      if (isNaN(d.getTime())) return escapeHtml(date);
+
+      return d.toLocaleDateString("fr-FR", {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
       });
+    }
+
+    function displayPosts(posts) {
+      const container = document.getElementById("posts");
+
+      if (!posts || posts.length === 0) {
+        container.innerHTML = `
+          <div class="message">
+            Aucune analyse disponible pour le moment.
+          </div>
+        `;
+        return;
+      }
+
+      container.innerHTML = posts.map(post => {
+
+        const sport = escapeHtml(post.sport);
+        const match = escapeHtml(post.match);
+        const title = escapeHtml(post.title);
+        const analysis = escapeHtml(post.analysis);
+        const category = escapeHtml(post.category || "ANALYSE");
+        const confidence = escapeHtml(post.confidence);
+        const date = formatDate(post.date);
+        const result = post.result || "pending";
+
+        let resultText = "En attente";
+
+        if (result === "win") {
+          resultText = "Résultat positif";
+        }
+
+        if (result === "loss") {
+          resultText = "Résultat négatif";
+        }
+
+        return `
+          <article class="post">
+
+            <div class="post-top">
+              <div class="sport">${sport}</div>
+              <div class="date">${date}</div>
+            </div>
+
+            <div class="match">
+              ${match}
+            </div>
+
+            ${
+              title
+                ? `<div class="title">${title}</div>`
+                : ""
+            }
+
+            <div class="info">
+
+              <span class="badge">
+                ${category}
+              </span>
+
+              ${
+                confidence
+                  ? `<span class="badge confidence">
+                      Confiance : ${confidence}
+                     </span>`
+                  : ""
+              }
+
+            </div>
+
+            <div class="analysis">
+              ${analysis}
+            </div>
+
+            <div class="result ${escapeHtml(result)}">
+              ${resultText}
+            </div>
+
+          </article>
+        `;
+
+      }).join("");
+    }
+
+    function filterSport(sport, button) {
+
+      currentSport = sport;
+
+      document
+        .querySelectorAll(".sport-menu button")
+        .forEach(btn => btn.classList.remove("active"));
 
       button.classList.add("active");
 
-      if(selectedSport === "all") {
-        filter.textContent = "TOUTES LES ANALYSES";
+      document.getElementById("sportMenu")
+        .classList.remove("active");
+
+      document.getElementById("sectionTitle").textContent =
+        sport === "Toutes les analyses"
+          ? "DERNIÈRES ANALYSES"
+          : "ANALYSES — " + sport.toUpperCase();
+
+      if (sport === "Toutes les analyses") {
+        displayPosts(allPosts);
       } else {
-        filter.textContent = selectedSport.toUpperCase();
+        const filtered = allPosts.filter(post =>
+          post.sport &&
+          post.sport.toLowerCase() === sport.toLowerCase()
+        );
+
+        displayPosts(filtered);
+      }
+    }
+
+    async function loadPosts() {
+
+      const container = document.getElementById("posts");
+
+      const { data, error } = await supabaseClient
+        .from("posts")
+        .select("*")
+        .order("created_at", { ascending: false });
+
+      if (error) {
+        console.error(error);
+
+        container.innerHTML = `
+          <div class="message">
+            Impossible de charger les analyses.
+          </div>
+        `;
+
+        return;
       }
 
-      menu.classList.remove("open");
+      allPosts = data || [];
 
-      displayPosts();
-    };
-
-  });
-
-  async function loadPosts() {
-
-    postsContainer.innerHTML = `
-      <div class="message">
-        Chargement des analyses...
-      </div>
-    `;
-
-    const result = await db
-      .from("posts")
-      .select("*")
-      .order("created_at", { ascending: false });
-
-    if(result.error) {
-
-      console.error(result.error);
-
-      postsContainer.innerHTML = `
-        <div class="message error">
-          Impossible de charger les analyses.
-        </div>
-      `;
-
-      return;
+      displayPosts(allPosts);
     }
 
-    posts = result.data || [];
+    loadPosts();
 
-    displayPosts();
-  }
-
-  function displayPosts() {
-
-    let filtered;
-
-    if(selectedSport === "all") {
-
-      filtered = posts;
-
-    } else {
-
-      filtered = posts.filter(function(post) {
-
-        return normalize(post.sport) === normalize(selectedSport);
-
-      });
-
-    }
-
-    if(filtered.length === 0) {
-
-      postsContainer.innerHTML = `
-        <div class="message">
-          Aucune analyse disponible pour ce sport.
-        </div>
-      `;
-
-      return;
-    }
-
-    postsContainer.innerHTML = "";
-
-    filtered.forEach(function(post) {
-
-      const article = document.createElement("article");
-
-      article.className = "post";
-
-      let date = "";
-
-      if(post.date) {
-
-        const d = new Date(post.date + "T00:00:00");
-
-        date = d.toLocaleDateString("fr-FR");
-
-      }
-
-      article.innerHTML = `
-
-        <div class="post-top">
-
-          <div class="sport">
-            ${escapeHtml(post.sport)}
-          </div>
-
-          <div class="category">
-            ${escapeHtml(post.category || "ANALYSE")}
-          </div>
-
-        </div>
-
-        <h2>
-          ${escapeHtml(post.title || "Analyse sportive")}
-        </h2>
-
-        <div class="match">
-          ${escapeHtml(post.match)}
-        </div>
-
-        ${
-          date
-          ? `<div class="date">${date}</div>`
-          : ""
-        }
-
-        <div class="analysis">
-          ${escapeHtml(post.analysis)}
-        </div>
-
-        ${
-          post.confidence
-          ? `
-            <div class="confidence">
-              <strong>Confiance :</strong>
-              ${escapeHtml(post.confidence)}
-            </div>
-          `
-          : ""
-        }
-
-        <a
-          class="more-button"
-          href="analyse.html?id=${encodeURIComponent(post.id)}"
-        >
-          VOIR PLUS
-          <span>→</span>
-        </a>
-
-      `;
-
-      postsContainer.appendChild(article);
-
-    });
-
-  }
-
-  function normalize(value) {
-
-    return String(value || "")
-      .trim()
-      .toLowerCase();
-
-  }
-
-  function escapeHtml(value) {
-
-    return String(value || "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
-
-  }
-
-  loadPosts();
-
-</script>
+  </script>
 
 </body>
 </html>

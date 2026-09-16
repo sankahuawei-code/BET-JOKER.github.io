@@ -1,53 +1,520 @@
-  margin:6px 0;
-  background:#080808;
-  color:#fff;
-  border:1px solid #333;
-  border-radius:7px;
-}
+  <!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-button{
-  background:#39ff14;
-  color:#000;
-  font-weight:bold;
-  cursor:pointer;
-}
+  <title>JOKER ANALYSIS</title>
 
-.danger{
-  background:#b00020;
-  color:#fff;
-}
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-.hidden{display:none}
+    body {
+      margin: 0;
+      background: #050505;
+      color: #ffffff;
+      font-family: Arial, sans-serif;
+    }
 
-.post{
-  border-top:1px solid #333;
-  padding:12px 0;
-}
+    header {
+      text-align: center;
+      padding: 45px 20px 30px;
+      border-bottom: 1px solid #222;
+    }
 
-.small{color:#888}
-</style>
+    .logo {
+      font-size: 42px;
+      font-weight: 900;
+      color: #39ff14;
+      letter-spacing: 3px;
+      text-shadow: 0 0 15px rgba(57, 255, 20, 0.35);
+    }
+
+    .subtitle {
+      margin-top: 10px;
+      color: #999;
+      font-size: 16px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 25px 15px 50px;
+    }
+
+    .topbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 15px;
+      margin-bottom: 25px;
+      flex-wrap: wrap;
+    }
+
+    .topbar h2 {
+      margin: 0;
+      color: #39ff14;
+    }
+
+    .admin-link {
+      display: inline-block;
+      padding: 10px 16px;
+      border: 1px solid #39ff14;
+      border-radius: 8px;
+      color: #39ff14;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    .admin-link:hover {
+      background: #39ff14;
+      color: #000;
+    }
+
+    .status {
+      text-align: center;
+      padding: 20px;
+      color: #888;
+    }
+
+    .error {
+      color: #ff4444;
+    }
+
+    .empty {
+      background: #101010;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 30px 20px;
+      text-align: center;
+      color: #888;
+    }
+
+    .post {
+      background: #101010;
+      border: 1px solid #242424;
+      border-radius: 12px;
+      padding: 22px;
+      margin-bottom: 20px;
+      box-shadow: 0 0 15px rgba(0, 0, 0, 0.35);
+    }
+
+    .post:hover {
+      border-color: #39ff14;
+    }
+
+    .post-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 15px;
+      margin-bottom: 12px;
+      flex-wrap: wrap;
+    }
+
+    .post-title {
+      margin: 0;
+      font-size: 23px;
+      color: #ffffff;
+    }
+
+    .category {
+      display: inline-block;
+      padding: 6px 10px;
+      border-radius: 6px;
+      background: #39ff14;
+      color: #000;
+      font-size: 12px;
+      font-weight: bold;
+    }
+
+    .meta {
+      color: #888;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+
+    .sport {
+      color: #39ff14;
+      font-weight: bold;
+    }
+
+    .analysis {
+      white-space: pre-wrap;
+      line-height: 1.7;
+      color: #ddd;
+      font-size: 16px;
+    }
+
+    .confidence {
+      margin-top: 18px;
+      padding: 10px 12px;
+      border-left: 3px solid #39ff14;
+      background: #080808;
+      color: #ccc;
+    }
+
+    footer {
+      text-align: center;
+      padding: 25px 15px;
+      border-top: 1px solid #222;
+      color: #666;
+      font-size: 13px;
+    }
+
+    @media (max-width: 600px) {
+
+      .logo {
+        font-size: 32px;
+      }
+
+      .post {
+        padding: 17px;
+      }
+
+      .post-title {
+        font-size: 20px;
+      }
+
+      .topbar {
+        align-items: stretch;
+      }
+
+      .admin-link {
+        text-align: center;
+      }
+    }
+  </style>
 </head>
 
 <body>
 
-<main>
 
-<h1>JOKER ANALYSIS — ADMIN</h1>
+  <!-- ==================== HEADER ==================== -->
 
-<section id="login" class="card">
+  <header>
 
-<h2>Connexion</h2>
+    <div class="logo">
+      JOKER ANALYSIS
+    </div>
 
-<input id="email" type="email" placeholder="Email">
+    <div class="subtitle">
+      Analyses et statistiques sportives
+    </div>
 
-<input id=<input
-  id="password"
-  type="password"
-  placeholder="Mot de passe"
-  autocomplete="current-password"
->
+  </header>
 
 
+  <!-- ==================== CONTENU ==================== -->
+
+  <main>
+
+    <div class="topbar">
+
+      <h2>
+        Dernières analyses
+      </h2>
+
+      <a
+        href="admin.html"
+        class="admin-link"
+      >
+        ESPACE ADMIN
+      </a>
+
+    </div>
 
 
-  
+    <div id="posts">
+
+      <div class="status">
+        Chargement des analyses...
+      </div>
+
+    </div>
+
+  </main>
+
+
+  <!-- ==================== FOOTER ==================== -->
+
+  <footer>
+
+    JOKER ANALYSIS © 2026
+
+  </footer>
+
+
+  <!-- ==================== SUPABASE ==================== -->
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="config.js"></script>
+
+
+  <!-- ==================== JAVASCRIPT ==================== -->
+
+  <script>
+
+    /* Vérification de la configuration */
+
+    const container =
+      document.getElementById("posts");
+
+
+    if (
+      !window.SUPABASE_URL ||
+      !window.SUPABASE_ANON_KEY
+    ) {
+
+      container.innerHTML = `
+        <div class="empty error">
+          Configuration Supabase introuvable.
+        </div>
+      `;
+
+    } else {
+
+
+      /* Création du client Supabase */
+
+      const sb =
+        supabase.createClient(
+          window.SUPABASE_URL,
+          window.SUPABASE_ANON_KEY
+        );
+
+
+      /* ==================== SÉCURITÉ HTML ==================== */
+
+      function escapeHtml(text) {
+
+        return String(text || "")
+
+          .replace(/&/g, "&amp;")
+
+          .replace(/</g, "&lt;")
+
+          .replace(/>/g, "&gt;")
+
+          .replace(/"/g, "&quot;")
+
+          .replace(/'/g, "&#039;");
+
+      }
+
+
+      /* ==================== DATE ==================== */
+
+      function formatDate(dateValue) {
+
+        if (!dateValue) {
+          return "";
+        }
+
+
+        const date =
+          new Date(dateValue);
+
+
+        if (isNaN(date.getTime())) {
+          return escapeHtml(dateValue);
+        }
+
+
+        return date.toLocaleDateString(
+          "fr-FR",
+          {
+            day: "2-digit",
+            month: "2-digit",
+            year: "numeric"
+          }
+        );
+
+      }
+
+
+      /* ==================== CHARGEMENT ==================== */
+
+      async function loadPosts() {
+
+        container.innerHTML = `
+          <div class="status">
+            Chargement des analyses...
+          </div>
+        `;
+
+
+        const result =
+          await sb
+            .from("posts")
+            .select("*")
+            .order("created_at", {
+              ascending: false
+            });
+
+
+        if (result.error) {
+
+          console.error(result.error);
+
+
+          container.innerHTML = `
+            <div class="empty error">
+              Impossible de charger les analyses.
+            </div>
+          `;
+
+          return;
+        }
+
+
+        const posts =
+          result.data || [];
+
+
+        /* Aucune analyse */
+
+        if (posts.length === 0) {
+
+          container.innerHTML = `
+            <div class="empty">
+              Aucune analyse publiée pour le moment.
+            </div>
+          `;
+
+          return;
+        }
+
+
+        /* Nettoyage */
+
+        container.innerHTML = "";
+
+
+        /* Affichage */
+
+        posts.forEach(function(post) {
+
+          const article =
+            document.createElement("article");
+
+          article.className =
+            "post";
+
+
+          const title =
+            escapeHtml(
+              post.title || "Analyse sportive"
+            );
+
+
+          const sport =
+            escapeHtml(
+              post.sport || ""
+            );
+
+
+          const match =
+            escapeHtml(
+              post.match || ""
+            );
+
+
+          const category =
+            escapeHtml(
+              post.category || "ANALYSE"
+            );
+
+
+          const analysis =
+            escapeHtml(
+              post.analysis || ""
+            );
+
+
+          const confidence =
+            escapeHtml(
+              post.confidence || ""
+            );
+
+
+          const date =
+            formatDate(post.date);
+
+
+          article.innerHTML = `
+
+            <div class="post-header">
+
+              <h3 class="post-title">
+                ${title}
+              </h3>
+
+              <span class="category">
+                ${category}
+              </span>
+
+            </div>
+
+
+            <div class="meta">
+
+              <span class="sport">
+                ${sport}
+              </span>
+
+              ${
+                match
+                  ? " — " + match
+                  : ""
+              }
+
+              ${
+                date
+                  ? " • " + date
+                  : ""
+              }
+
+            </div>
+
+
+            <div class="analysis">
+              ${analysis}
+            </div>
+
+
+            ${
+              confidence
+                ? `
+                  <div class="confidence">
+                    <strong>Confiance :</strong>
+                    ${confidence}
+                  </div>
+                `
+                : ""
+            }
+
+          `;
+
+
+          container.appendChild(article);
+
+        });
+
+      }
+
+
+      /* ==================== LANCEMENT ==================== */
+
+      loadPosts();
+
+    }
+
+  </script>
+
+</body>
+</html>

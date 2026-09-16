@@ -1,520 +1,381 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>JOKER ANALYSIS</title>
+<title>JOKER ANALYSIS</title>
 
-  <style>
-    * {
-      box-sizing: border-box;
-    }
+<style>
 
-    body {
-      margin: 0;
-      background: #050505;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-    }
+*{
+  box-sizing:border-box;
+}
 
-    header {
-      text-align: center;
-      padding: 45px 20px 30px;
-      border-bottom: 1px solid #222;
-    }
+body{
+  margin:0;
+  background:#050505;
+  color:#fff;
+  font-family:Arial, sans-serif;
+}
 
-    .logo {
-      font-size: 42px;
-      font-weight: 900;
-      color: #39ff14;
-      letter-spacing: 3px;
-      text-shadow: 0 0 15px rgba(57, 255, 20, 0.35);
-    }
+/* ===== BOUTON ESPACE ADMIN ===== */
 
-    .subtitle {
-      margin-top: 10px;
-      color: #999;
-      font-size: 16px;
-    }
+.admin-link{
+  position:fixed;
+  top:16px;
+  right:16px;
+  z-index:1000;
 
-    main {
-      width: 100%;
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 25px 15px 50px;
-    }
+  padding:8px 12px;
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 25px;
-      flex-wrap: wrap;
-    }
+  border:1px solid #39ff14;
+  border-radius:8px;
 
-    .topbar h2 {
-      margin: 0;
-      color: #39ff14;
-    }
+  color:#39ff14;
+  background:rgba(0,0,0,.85);
 
-    .admin-link {
-      display: inline-block;
-      padding: 10px 16px;
-      border: 1px solid #39ff14;
-      border-radius: 8px;
-      color: #39ff14;
-      text-decoration: none;
-      font-weight: bold;
-    }
+  text-decoration:none;
+  font-size:12px;
+  font-weight:bold;
+  letter-spacing:1px;
 
-    .admin-link:hover {
-      background: #39ff14;
-      color: #000;
-    }
+  box-shadow:0 0 8px rgba(57,255,20,.25);
 
-    .status {
-      text-align: center;
-      padding: 20px;
-      color: #888;
-    }
+  transition:.2s;
+}
 
-    .error {
-      color: #ff4444;
-    }
+.admin-link:hover{
+  background:#39ff14;
+  color:#000;
+  box-shadow:0 0 18px rgba(57,255,20,.7);
+}
 
-    .empty {
-      background: #101010;
-      border: 1px solid #222;
-      border-radius: 12px;
-      padding: 30px 20px;
-      text-align: center;
-      color: #888;
-    }
+/* ===== CONTENU ===== */
 
-    .post {
-      background: #101010;
-      border: 1px solid #242424;
-      border-radius: 12px;
-      padding: 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.35);
-    }
+main{
+  width:100%;
+  max-width:900px;
+  margin:auto;
+  padding:70px 15px 40px;
+}
 
-    .post:hover {
-      border-color: #39ff14;
-    }
+header{
+  text-align:center;
+  margin-bottom:35px;
+}
 
-    .post-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 15px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
+h1{
+  margin:0;
+  color:#39ff14;
+  font-size:38px;
+  letter-spacing:3px;
+  text-shadow:0 0 12px rgba(57,255,20,.5);
+}
 
-    .post-title {
-      margin: 0;
-      font-size: 23px;
-      color: #ffffff;
-    }
+.subtitle{
+  margin-top:10px;
+  color:#aaa;
+  font-size:15px;
+}
 
-    .category {
-      display: inline-block;
-      padding: 6px 10px;
-      border-radius: 6px;
-      background: #39ff14;
-      color: #000;
-      font-size: 12px;
-      font-weight: bold;
-    }
+/* ===== ANALYSES ===== */
 
-    .meta {
-      color: #888;
-      font-size: 14px;
-      margin-bottom: 18px;
-    }
+#posts{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
 
-    .sport {
-      color: #39ff14;
-      font-weight: bold;
-    }
+.post{
+  background:#111;
+  border:1px solid #292929;
+  border-radius:12px;
+  padding:20px;
 
-    .analysis {
-      white-space: pre-wrap;
-      line-height: 1.7;
-      color: #ddd;
-      font-size: 16px;
-    }
+  box-shadow:0 0 10px rgba(0,0,0,.4);
+}
 
-    .confidence {
-      margin-top: 18px;
-      padding: 10px 12px;
-      border-left: 3px solid #39ff14;
-      background: #080808;
-      color: #ccc;
-    }
+.post:hover{
+  border-color:#39ff14;
+  box-shadow:0 0 15px rgba(57,255,20,.12);
+}
 
-    footer {
-      text-align: center;
-      padding: 25px 15px;
-      border-top: 1px solid #222;
-      color: #666;
-      font-size: 13px;
-    }
+.post-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  gap:10px;
+  flex-wrap:wrap;
+}
 
-    @media (max-width: 600px) {
+.sport{
+  color:#39ff14;
+  font-weight:bold;
+  font-size:14px;
+  text-transform:uppercase;
+}
 
-      .logo {
-        font-size: 32px;
-      }
+.category{
+  color:#888;
+  font-size:12px;
+}
 
-      .post {
-        padding: 17px;
-      }
+.post h2{
+  margin:12px 0 6px;
+  font-size:22px;
+}
 
-      .post-title {
-        font-size: 20px;
-      }
+.match{
+  color:#ccc;
+  font-weight:bold;
+  margin-bottom:15px;
+}
 
-      .topbar {
-        align-items: stretch;
-      }
+.date{
+  color:#777;
+  font-size:13px;
+  margin-bottom:15px;
+}
 
-      .admin-link {
-        text-align: center;
-      }
-    }
-  </style>
+.analysis{
+  color:#ddd;
+  line-height:1.6;
+  white-space:pre-line;
+}
+
+.confidence{
+  margin-top:18px;
+  padding:10px;
+
+  border-left:3px solid #39ff14;
+
+  background:#0b0b0b;
+  color:#bbb;
+}
+
+.empty{
+  text-align:center;
+  color:#777;
+  padding:40px 10px;
+}
+
+.error{
+  text-align:center;
+  color:#ff4444;
+  padding:30px 10px;
+}
+
+/* ===== MOBILE ===== */
+
+@media(max-width:600px){
+
+  .admin-link{
+    top:10px;
+    right:10px;
+    font-size:11px;
+    padding:7px 9px;
+  }
+
+  main{
+    padding-top:65px;
+  }
+
+  h1{
+    font-size:30px;
+  }
+
+  .post h2{
+    font-size:19px;
+  }
+
+}
+
+</style>
 </head>
+
 
 <body>
 
+<!-- ESPACE ADMIN -->
 
-  <!-- ==================== HEADER ==================== -->
+<a href="admin.html" class="admin-link">
+  ESPACE ADMIN
+</a>
 
-  <header>
 
-    <div class="logo">
-      JOKER ANALYSIS
+<main>
+
+<header>
+
+<h1>JOKER ANALYSIS</h1>
+
+<div class="subtitle">
+Analyses et statistiques sportives
+</div>
+
+</header>
+
+
+<section id="posts">
+
+<div class="empty">
+Chargement des analyses...
+</div>
+
+</section>
+
+</main>
+
+
+<!-- SUPABASE -->
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<script src="config.js"></script>
+
+
+<script>
+
+const db = supabase.createClient(
+  window.SUPABASE_URL,
+  window.SUPABASE_ANON_KEY
+);
+
+
+async function loadPosts(){
+
+  const container = document.getElementById("posts");
+
+  container.innerHTML = `
+    <div class="empty">
+      Chargement des analyses...
     </div>
-
-    <div class="subtitle">
-      Analyses et statistiques sportives
-    </div>
-
-  </header>
+  `;
 
 
-  <!-- ==================== CONTENU ==================== -->
-
-  <main>
-
-    <div class="topbar">
-
-      <h2>
-        Dernières analyses
-      </h2>
-
-      <a
-        href="admin.html"
-        class="admin-link"
-      >
-        ESPACE ADMIN
-      </a>
-
-    </div>
+  const { data, error } = await db
+    .from("posts")
+    .select("*")
+    .order("created_at", {
+      ascending:false
+    });
 
 
-    <div id="posts">
+  if(error){
 
-      <div class="status">
-        Chargement des analyses...
+    container.innerHTML = `
+      <div class="error">
+        Impossible de charger les analyses.
+      </div>
+    `;
+
+    console.error(error);
+
+    return;
+  }
+
+
+  if(!data || data.length === 0){
+
+    container.innerHTML = `
+      <div class="empty">
+        Aucune analyse publiée pour le moment.
+      </div>
+    `;
+
+    return;
+  }
+
+
+  container.innerHTML = "";
+
+
+  data.forEach(post => {
+
+    const article = document.createElement("article");
+
+    article.className = "post";
+
+
+    const date = post.date
+      ? new Date(post.date).toLocaleDateString("fr-FR")
+      : "";
+
+
+    article.innerHTML = `
+
+      <div class="post-header">
+
+        <div class="sport">
+          ${escapeHtml(post.sport || "")}
+        </div>
+
+        <div class="category">
+          ${escapeHtml(post.category || "ANALYSE")}
+        </div>
+
       </div>
 
-    </div>
 
-  </main>
-
-
-  <!-- ==================== FOOTER ==================== -->
-
-  <footer>
-
-    JOKER ANALYSIS © 2026
-
-  </footer>
+      <h2>
+        ${escapeHtml(post.title || "Analyse sportive")}
+      </h2>
 
 
-  <!-- ==================== SUPABASE ==================== -->
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <script src="config.js"></script>
+      <div class="match">
+        ${escapeHtml(post.match || "")}
+      </div>
 
 
-  <!-- ==================== JAVASCRIPT ==================== -->
-
-  <script>
-
-    /* Vérification de la configuration */
-
-    const container =
-      document.getElementById("posts");
-
-
-    if (
-      !window.SUPABASE_URL ||
-      !window.SUPABASE_ANON_KEY
-    ) {
-
-      container.innerHTML = `
-        <div class="empty error">
-          Configuration Supabase introuvable.
-        </div>
-      `;
-
-    } else {
-
-
-      /* Création du client Supabase */
-
-      const sb =
-        supabase.createClient(
-          window.SUPABASE_URL,
-          window.SUPABASE_ANON_KEY
-        );
-
-
-      /* ==================== SÉCURITÉ HTML ==================== */
-
-      function escapeHtml(text) {
-
-        return String(text || "")
-
-          .replace(/&/g, "&amp;")
-
-          .replace(/</g, "&lt;")
-
-          .replace(/>/g, "&gt;")
-
-          .replace(/"/g, "&quot;")
-
-          .replace(/'/g, "&#039;");
-
+      ${
+        date
+        ? `<div class="date">${date}</div>`
+        : ""
       }
 
 
-      /* ==================== DATE ==================== */
-
-      function formatDate(dateValue) {
-
-        if (!dateValue) {
-          return "";
-        }
+      <div class="analysis">
+        ${escapeHtml(post.analysis || "")}
+      </div>
 
 
-        const date =
-          new Date(dateValue);
-
-
-        if (isNaN(date.getTime())) {
-          return escapeHtml(dateValue);
-        }
-
-
-        return date.toLocaleDateString(
-          "fr-FR",
-          {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric"
-          }
-        );
-
-      }
-
-
-      /* ==================== CHARGEMENT ==================== */
-
-      async function loadPosts() {
-
-        container.innerHTML = `
-          <div class="status">
-            Chargement des analyses...
+      ${
+        post.confidence
+        ? `
+          <div class="confidence">
+            <strong>Confiance :</strong>
+            ${escapeHtml(post.confidence)}
           </div>
-        `;
-
-
-        const result =
-          await sb
-            .from("posts")
-            .select("*")
-            .order("created_at", {
-              ascending: false
-            });
-
-
-        if (result.error) {
-
-          console.error(result.error);
-
-
-          container.innerHTML = `
-            <div class="empty error">
-              Impossible de charger les analyses.
-            </div>
-          `;
-
-          return;
-        }
-
-
-        const posts =
-          result.data || [];
-
-
-        /* Aucune analyse */
-
-        if (posts.length === 0) {
-
-          container.innerHTML = `
-            <div class="empty">
-              Aucune analyse publiée pour le moment.
-            </div>
-          `;
-
-          return;
-        }
-
-
-        /* Nettoyage */
-
-        container.innerHTML = "";
-
-
-        /* Affichage */
-
-        posts.forEach(function(post) {
-
-          const article =
-            document.createElement("article");
-
-          article.className =
-            "post";
-
-
-          const title =
-            escapeHtml(
-              post.title || "Analyse sportive"
-            );
-
-
-          const sport =
-            escapeHtml(
-              post.sport || ""
-            );
-
-
-          const match =
-            escapeHtml(
-              post.match || ""
-            );
-
-
-          const category =
-            escapeHtml(
-              post.category || "ANALYSE"
-            );
-
-
-          const analysis =
-            escapeHtml(
-              post.analysis || ""
-            );
-
-
-          const confidence =
-            escapeHtml(
-              post.confidence || ""
-            );
-
-
-          const date =
-            formatDate(post.date);
-
-
-          article.innerHTML = `
-
-            <div class="post-header">
-
-              <h3 class="post-title">
-                ${title}
-              </h3>
-
-              <span class="category">
-                ${category}
-              </span>
-
-            </div>
-
-
-            <div class="meta">
-
-              <span class="sport">
-                ${sport}
-              </span>
-
-              ${
-                match
-                  ? " — " + match
-                  : ""
-              }
-
-              ${
-                date
-                  ? " • " + date
-                  : ""
-              }
-
-            </div>
-
-
-            <div class="analysis">
-              ${analysis}
-            </div>
-
-
-            ${
-              confidence
-                ? `
-                  <div class="confidence">
-                    <strong>Confiance :</strong>
-                    ${confidence}
-                  </div>
-                `
-                : ""
-            }
-
-          `;
-
-
-          container.appendChild(article);
-
-        });
-
+        `
+        : ""
       }
 
+    `;
 
-      /* ==================== LANCEMENT ==================== */
 
-      loadPosts();
+    container.appendChild(article);
 
-    }
+  });
 
-  </script>
+}
+
+
+function escapeHtml(text){
+
+  return String(text || "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#039;");
+
+}
+
+
+loadPosts();
+
+</script>
 
 </body>
 </html>

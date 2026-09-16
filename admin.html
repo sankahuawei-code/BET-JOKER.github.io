@@ -1,10 +1,10 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="fr">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>JOKER ANALYSIS</title>
+  <title>Admin - JOKER ANALYSIS</title>
 
   <style>
     * {
@@ -18,503 +18,952 @@
       font-family: Arial, sans-serif;
     }
 
-    header {
-      text-align: center;
-      padding: 45px 20px 30px;
-      border-bottom: 1px solid #222;
-    }
-
-    .logo {
-      font-size: 42px;
-      font-weight: 900;
-      color: #39ff14;
-      letter-spacing: 3px;
-      text-shadow: 0 0 15px rgba(57, 255, 20, 0.35);
-    }
-
-    .subtitle {
-      margin-top: 10px;
-      color: #999;
-      font-size: 16px;
-    }
-
     main {
       width: 100%;
-      max-width: 1000px;
-      margin: 0 auto;
+      max-width: 900px;
+      margin: auto;
       padding: 25px 15px 50px;
     }
 
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: 15px;
-      margin-bottom: 25px;
-      flex-wrap: wrap;
-    }
-
-    .topbar h2 {
-      margin: 0;
+    h1 {
       color: #39ff14;
-    }
-
-    .admin-link {
-      display: inline-block;
-      padding: 10px 16px;
-      border: 1px solid #39ff14;
-      border-radius: 8px;
-      color: #39ff14;
-      text-decoration: none;
-      font-weight: bold;
-    }
-
-    .admin-link:hover {
-      background: #39ff14;
-      color: #000;
-    }
-
-    .status {
       text-align: center;
+      margin-bottom: 30px;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .card {
+      background: #111111;
+      border: 1px solid #292929;
+      border-radius: 12px;
       padding: 20px;
-      color: #888;
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-top: 12px;
+      margin-bottom: 5px;
+      color: #bbbbbb;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      padding: 13px;
+      background: #080808;
+      color: #ffffff;
+      border: 1px solid #444444;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 180px;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: #39ff14;
+    }
+
+    button {
+      width: 100%;
+      padding: 14px;
+      margin-top: 15px;
+      background: #39ff14;
+      color: #000000;
+      border: 0;
+      border-radius: 8px;
+      font-size: 16px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:active {
+      transform: scale(0.99);
+    }
+
+    button:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    .danger {
+      background: #b00020;
+      color: #ffffff;
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    .message {
+      margin-top: 15px;
+      line-height: 1.5;
+    }
+
+    .success {
+      color: #39ff14;
     }
 
     .error {
       color: #ff4444;
     }
 
-    .empty {
-      background: #101010;
-      border: 1px solid #222;
-      border-radius: 12px;
-      padding: 30px 20px;
-      text-align: center;
-      color: #888;
-    }
-
     .post {
-      background: #101010;
-      border: 1px solid #242424;
-      border-radius: 12px;
-      padding: 22px;
-      margin-bottom: 20px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.35);
+      border-top: 1px solid #333333;
+      padding: 18px 0;
     }
 
-    .post:hover {
-      border-color: #39ff14;
+    .post:first-child {
+      border-top: 0;
     }
 
-    .post-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: flex-start;
-      gap: 15px;
-      margin-bottom: 12px;
-      flex-wrap: wrap;
-    }
-
-    .post-title {
-      margin: 0;
-      font-size: 23px;
-      color: #ffffff;
-    }
-
-    .category {
-      display: inline-block;
-      padding: 6px 10px;
-      border-radius: 6px;
-      background: #39ff14;
-      color: #000;
-      font-size: 12px;
-      font-weight: bold;
-    }
-
-    .meta {
-      color: #888;
+    .small {
+      color: #888888;
       font-size: 14px;
-      margin-bottom: 18px;
     }
 
-    .sport {
+    a {
       color: #39ff14;
-      font-weight: bold;
+      text-decoration: none;
     }
 
-    .analysis {
-      white-space: pre-wrap;
-      line-height: 1.7;
-      color: #ddd;
-      font-size: 16px;
-    }
-
-    .confidence {
-      margin-top: 18px;
-      padding: 10px 12px;
-      border-left: 3px solid #39ff14;
-      background: #080808;
-      color: #ccc;
-    }
-
-    footer {
-      text-align: center;
-      padding: 25px 15px;
-      border-top: 1px solid #222;
-      color: #666;
-      font-size: 13px;
-    }
-
-    @media (max-width: 600px) {
-
-      .logo {
-        font-size: 32px;
-      }
-
-      .post {
-        padding: 17px;
-      }
-
-      .post-title {
-        font-size: 20px;
-      }
-
-      .topbar {
-        align-items: stretch;
-      }
-
-      .admin-link {
-        text-align: center;
-      }
+    a:hover {
+      text-decoration: underline;
     }
   </style>
 </head>
 
 <body>
 
+<main>
 
-  <!-- ==================== HEADER ==================== -->
-
-  <header>
-
-    <div class="logo">
-      JOKER ANALYSIS
-    </div>
-
-    <div class="subtitle">
-      Analyses et statistiques sportives
-    </div>
-
-  </header>
+  <h1>JOKER ANALYSIS — ADMIN</h1>
 
 
-  <!-- ==================== CONTENU ==================== -->
+  <!-- CONNEXION -->
 
-  <main>
+  <section id="loginSection" class="card">
 
-    <div class="topbar">
+    <h2>Connexion</h2>
+
+    <p class="small">
+      Connecte-toi avec ton compte administrateur.
+    </p>
+
+    <label for="email">
+      Adresse e-mail
+    </label>
+
+    <input
+      id="email"
+      type="email"
+      placeholder="Ton adresse e-mail"
+      autocomplete="email"
+    >
+
+    <label for="password">
+      Mot de passe
+    </label>
+
+    <input
+      id="password"
+      type="password"
+      placeholder="Ton mot de passe"
+      autocomplete="current-password"
+    >
+
+    <button
+      id="loginButton"
+      type="button"
+    >
+      SE CONNECTER
+    </button>
+
+    <p
+      id="loginMessage"
+      class="message"
+    ></p>
+
+  </section>
+
+
+  <!-- PANNEAU ADMIN -->
+
+  <section
+    id="adminPanel"
+    class="hidden"
+  >
+
+    <!-- PUBLICATION -->
+
+    <div class="card">
 
       <h2>
-        Dernières analyses
+        Publier une analyse
       </h2>
 
-      <a
-        href="admin.html"
-        class="admin-link"
+      <label for="sport">
+        Sport
+      </label>
+
+      <input
+        id="sport"
+        type="text"
+        placeholder="Exemple : Football"
       >
-        ESPACE ADMIN
-      </a>
+
+
+      <label for="match">
+        Match / événement
+      </label>
+
+      <input
+        id="match"
+        type="text"
+        placeholder="Exemple : Marseille - Lyon"
+      >
+
+
+      <label for="title">
+        Titre
+      </label>
+
+      <input
+        id="title"
+        type="text"
+        placeholder="Titre de l'analyse"
+      >
+
+
+      <label for="date">
+        Date
+      </label>
+
+      <input
+        id="date"
+        type="date"
+      >
+
+
+      <label for="confidence">
+        Confiance (facultatif)
+      </label>
+
+      <input
+        id="confidence"
+        type="text"
+        placeholder="Exemple : Élevée"
+      >
+
+
+      <label for="category">
+        Catégorie
+      </label>
+
+      <select id="category">
+
+        <option value="ANALYSE">
+          ANALYSE
+        </option>
+
+        <option value="STATISTIQUES">
+          STATISTIQUES
+        </option>
+
+        <option value="ACTUALITÉ">
+          ACTUALITÉ
+        </option>
+
+      </select>
+
+
+      <label for="analysis">
+        Analyse
+      </label>
+
+      <textarea
+        id="analysis"
+        placeholder="Écris ton analyse ici..."
+      ></textarea>
+
+
+      <button
+        id="publishButton"
+        type="button"
+      >
+        PUBLIER L'ANALYSE
+      </button>
+
+      <p
+        id="publishMessage"
+        class="message"
+      ></p>
 
     </div>
 
 
-    <div id="posts">
+    <!-- ANALYSES EXISTANTES -->
 
-      <div class="status">
-        Chargement des analyses...
+    <div class="card">
+
+      <h2>
+        Analyses publiées
+      </h2>
+
+      <div id="postsList">
+        Chargement...
       </div>
 
     </div>
 
-  </main>
 
+    <!-- DÉCONNEXION -->
 
-  <!-- ==================== FOOTER ==================== -->
+    <div class="card">
 
-  <footer>
+      <button
+        id="logoutButton"
+        type="button"
+        class="danger"
+      >
+        SE DÉCONNECTER
+      </button>
 
-    JOKER ANALYSIS © 2026
+    </div>
 
-  </footer>
+  </section>
 
 
-  <!-- ==================== SUPABASE ==================== -->
+  <p>
+    <a href="index.html">
+      ← Retour au site
+    </a>
+  </p>
 
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+</main>
 
-  <script src="config.js"></script>
 
+<!-- SUPABASE -->
 
-  <!-- ==================== JAVASCRIPT ==================== -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
-  <script>
+<!-- CONFIGURATION SUPABASE -->
 
-    /* Vérification de la configuration */
+<script src="config.js"></script>
 
-    const container =
-      document.getElementById("posts");
 
+<script>
 
-    if (
-      !window.SUPABASE_URL ||
-      !window.SUPABASE_ANON_KEY
-    ) {
+  /* =====================================================
+     INITIALISATION
+  ===================================================== */
 
-      container.innerHTML = `
-        <div class="empty error">
-          Configuration Supabase introuvable.
-        </div>
-      `;
+  const supabaseClient =
+    supabase.createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_ANON_KEY
+    );
 
-    } else {
 
+  /* =====================================================
+     ÉLÉMENTS DE LA PAGE
+  ===================================================== */
 
-      /* Création du client Supabase */
+  const loginSection =
+    document.getElementById("loginSection");
 
-      const sb =
-        supabase.createClient(
-          window.SUPABASE_URL,
-          window.SUPABASE_ANON_KEY
-        );
+  const adminPanel =
+    document.getElementById("adminPanel");
 
+  const emailInput =
+    document.getElementById("email");
 
-      /* ==================== SÉCURITÉ HTML ==================== */
+  const passwordInput =
+    document.getElementById("password");
 
-      function escapeHtml(text) {
+  const loginButton =
+    document.getElementById("loginButton");
 
-        return String(text || "")
+  const loginMessage =
+    document.getElementById("loginMessage");
 
-          .replace(/&/g, "&amp;")
+  const publishButton =
+    document.getElementById("publishButton");
 
-          .replace(/</g, "&lt;")
+  const publishMessage =
+    document.getElementById("publishMessage");
 
-          .replace(/>/g, "&gt;")
+  const logoutButton =
+    document.getElementById("logoutButton");
 
-          .replace(/"/g, "&quot;")
+  const postsList =
+    document.getElementById("postsList");
 
-          .replace(/'/g, "&#039;");
 
-      }
+  /* =====================================================
+     CONNEXION
+  ===================================================== */
 
+  async function login() {
 
-      /* ==================== DATE ==================== */
+    const email =
+      emailInput.value.trim();
 
-      function formatDate(dateValue) {
+    const password =
+      passwordInput.value;
 
-        if (!dateValue) {
-          return "";
-        }
 
+    if (email === "" || password === "") {
 
-        const date =
-          new Date(dateValue);
+      loginMessage.textContent =
+        "Entre ton adresse e-mail et ton mot de passe.";
 
+      loginMessage.className =
+        "message error";
 
-        if (isNaN(date.getTime())) {
-          return escapeHtml(dateValue);
-        }
+      return;
+    }
 
 
-        return date.toLocaleDateString(
-          "fr-FR",
-          {
-            day: "2-digit",
-            month: "2-digit",
-            year: "numeric"
-          }
-        );
+    loginButton.disabled = true;
 
-      }
+    loginButton.textContent =
+      "CONNEXION...";
 
+    loginMessage.textContent = "";
 
-      /* ==================== CHARGEMENT ==================== */
 
-      async function loadPosts() {
+    try {
 
-        container.innerHTML = `
-          <div class="status">
-            Chargement des analyses...
-          </div>
-        `;
+      const response =
+        await supabaseClient.auth.signInWithPassword({
 
+          email: email,
 
-        const result =
-          await sb
-            .from("posts")
-            .select("*")
-            .order("created_at", {
-              ascending: false
-            });
-
-
-        if (result.error) {
-
-          console.error(result.error);
-
-
-          container.innerHTML = `
-            <div class="empty error">
-              Impossible de charger les analyses.
-            </div>
-          `;
-
-          return;
-        }
-
-
-        const posts =
-          result.data || [];
-
-
-        /* Aucune analyse */
-
-        if (posts.length === 0) {
-
-          container.innerHTML = `
-            <div class="empty">
-              Aucune analyse publiée pour le moment.
-            </div>
-          `;
-
-          return;
-        }
-
-
-        /* Nettoyage */
-
-        container.innerHTML = "";
-
-
-        /* Affichage */
-
-        posts.forEach(function(post) {
-
-          const article =
-            document.createElement("article");
-
-          article.className =
-            "post";
-
-
-          const title =
-            escapeHtml(
-              post.title || "Analyse sportive"
-            );
-
-
-          const sport =
-            escapeHtml(
-              post.sport || ""
-            );
-
-
-          const match =
-            escapeHtml(
-              post.match || ""
-            );
-
-
-          const category =
-            escapeHtml(
-              post.category || "ANALYSE"
-            );
-
-
-          const analysis =
-            escapeHtml(
-              post.analysis || ""
-            );
-
-
-          const confidence =
-            escapeHtml(
-              post.confidence || ""
-            );
-
-
-          const date =
-            formatDate(post.date);
-
-
-          article.innerHTML = `
-
-            <div class="post-header">
-
-              <h3 class="post-title">
-                ${title}
-              </h3>
-
-              <span class="category">
-                ${category}
-              </span>
-
-            </div>
-
-
-            <div class="meta">
-
-              <span class="sport">
-                ${sport}
-              </span>
-
-              ${
-                match
-                  ? " — " + match
-                  : ""
-              }
-
-              ${
-                date
-                  ? " • " + date
-                  : ""
-              }
-
-            </div>
-
-
-            <div class="analysis">
-              ${analysis}
-            </div>
-
-
-            ${
-              confidence
-                ? `
-                  <div class="confidence">
-                    <strong>Confiance :</strong>
-                    ${confidence}
-                  </div>
-                `
-                : ""
-            }
-
-          `;
-
-
-          container.appendChild(article);
+          password: password
 
         });
 
+
+      if (response.error) {
+
+        loginMessage.textContent =
+          "Erreur : " +
+          response.error.message;
+
+        loginMessage.className =
+          "message error";
+
+        loginButton.disabled = false;
+
+        loginButton.textContent =
+          "SE CONNECTER";
+
+        return;
       }
 
 
-      /* ==================== LANCEMENT ==================== */
+      loginMessage.textContent =
+        "Connexion réussie.";
 
-      loadPosts();
+      loginMessage.className =
+        "message success";
+
+
+      showAdmin();
+
+
+    } catch (error) {
+
+      loginMessage.textContent =
+        "Impossible de contacter Supabase.";
+
+      loginMessage.className =
+        "message error";
+
+      loginButton.disabled = false;
+
+      loginButton.textContent =
+        "SE CONNECTER";
 
     }
 
-  </script>
+  }
+
+
+  /* =====================================================
+     AFFICHER ADMIN
+  ===================================================== */
+
+  function showAdmin() {
+
+    loginSection.classList.add("hidden");
+
+    adminPanel.classList.remove("hidden");
+
+    loadPosts();
+
+  }
+
+
+  /* =====================================================
+     PUBLICATION
+  ===================================================== */
+
+  async function publishAnalysis() {
+
+    const sport =
+      document.getElementById("sport").value.trim();
+
+    const match =
+      document.getElementById("match").value.trim();
+
+    const title =
+      document.getElementById("title").value.trim();
+
+    const date =
+      document.getElementById("date").value || null;
+
+    const confidence =
+      document.getElementById("confidence").value.trim();
+
+    const category =
+      document.getElementById("category").value;
+
+    const analysis =
+      document.getElementById("analysis").value.trim();
+
+
+    if (
+      sport === "" ||
+      match === "" ||
+      analysis === ""
+    ) {
+
+      publishMessage.textContent =
+        "Sport, match et analyse sont obligatoires.";
+
+      publishMessage.className =
+        "message error";
+
+      return;
+    }
+
+
+    publishButton.disabled = true;
+
+    publishButton.textContent =
+      "PUBLICATION...";
+
+    publishMessage.textContent = "";
+
+
+    try {
+
+      const response =
+        await supabaseClient
+          .from("posts")
+          .insert({
+
+            sport: sport,
+
+            match: match,
+
+            title: title || null,
+
+            date: date,
+
+            confidence:
+              confidence || null,
+
+            category: category,
+
+            analysis: analysis,
+
+            result: "pending"
+
+          });
+
+
+      if (response.error) {
+
+        publishMessage.textContent =
+          "Erreur : " +
+          response.error.message;
+
+        publishMessage.className =
+          "message error";
+
+        publishButton.disabled = false;
+
+        publishButton.textContent =
+          "PUBLIER L'ANALYSE";
+
+        return;
+      }
+
+
+      publishMessage.textContent =
+        "Analyse publiée avec succès !";
+
+      publishMessage.className =
+        "message success";
+
+
+      document.getElementById("sport").value = "";
+
+      document.getElementById("match").value = "";
+
+      document.getElementById("title").value = "";
+
+      document.getElementById("date").value = "";
+
+      document.getElementById("confidence").value = "";
+
+      document.getElementById("analysis").value = "";
+
+
+      publishButton.disabled = false;
+
+      publishButton.textContent =
+        "PUBLIER L'ANALYSE";
+
+
+      loadPosts();
+
+
+    } catch (error) {
+
+      publishMessage.textContent =
+        "Une erreur est survenue.";
+
+      publishMessage.className =
+        "message error";
+
+      publishButton.disabled = false;
+
+      publishButton.textContent =
+        "PUBLIER L'ANALYSE";
+
+    }
+
+  }
+
+
+  /* =====================================================
+     CHARGER LES ANALYSES
+  ===================================================== */
+
+  async function loadPosts() {
+
+    postsList.innerHTML =
+      "Chargement...";
+
+
+    try {
+
+      const response =
+        await supabaseClient
+          .from("posts")
+          .select("*")
+          .order(
+            "created_at",
+            {
+              ascending: false
+            }
+          );
+
+
+      if (response.error) {
+
+        postsList.innerHTML =
+          '<p class="error">' +
+          escapeHtml(
+            response.error.message
+          ) +
+          '</p>';
+
+        return;
+      }
+
+
+      const posts =
+        response.data || [];
+
+
+      if (posts.length === 0) {
+
+        postsList.innerHTML =
+          '<p class="small">' +
+          'Aucune analyse publiée pour le moment.' +
+          '</p>';
+
+        return;
+      }
+
+
+      postsList.innerHTML = "";
+
+
+      posts.forEach(function(post) {
+
+        const article =
+          document.createElement("div");
+
+        article.className =
+          "post";
+
+
+        article.innerHTML = `
+
+          <h3>
+            ${escapeHtml(
+              post.title ||
+              "Analyse sportive"
+            )}
+          </h3>
+
+          <p class="small">
+            ${escapeHtml(
+              post.sport || ""
+            )}
+
+            —
+
+            ${escapeHtml(
+              post.match || ""
+            )}
+
+            ${
+              post.date
+                ? " — " +
+                  escapeHtml(post.date)
+                : ""
+            }
+          </p>
+
+          <p>
+            ${escapeHtml(
+              post.analysis || ""
+            )}
+          </p>
+
+          ${
+            post.confidence
+              ? `
+                <p class="small">
+                  Confiance :
+                  ${escapeHtml(
+                    post.confidence
+                  )}
+                </p>
+              `
+              : ""
+          }
+
+          <button
+            type="button"
+            class="danger"
+            data-id="${post.id}"
+          >
+            SUPPRIMER
+          </button>
+
+        `;
+
+
+        const deleteButton =
+          article.querySelector(
+            "button[data-id]"
+          );
+
+
+        deleteButton.addEventListener(
+          "click",
+          function() {
+
+            deletePost(post.id);
+
+          }
+        );
+
+
+        postsList.appendChild(article);
+
+      });
+
+
+    } catch (error) {
+
+      postsList.innerHTML =
+        '<p class="error">' +
+        'Erreur de chargement.' +
+        '</p>';
+
+    }
+
+  }
+
+
+  /* =====================================================
+     SUPPRESSION
+  ===================================================== */
+
+  async function deletePost(id) {
+
+    const confirmation =
+      confirm(
+        "Voulez-vous vraiment supprimer cette analyse ?"
+      );
+
+
+    if (!confirmation) {
+      return;
+    }
+
+
+    const response =
+      await supabaseClient
+        .from("posts")
+        .delete()
+        .eq("id", id);
+
+
+    if (response.error) {
+
+      alert(
+        "Erreur : " +
+        response.error.message
+      );
+
+      return;
+    }
+
+
+    loadPosts();
+
+  }
+
+
+  /* =====================================================
+     DÉCONNEXION
+  ===================================================== */
+
+  async function logout() {
+
+    await supabaseClient.auth.signOut();
+
+    adminPanel.classList.add("hidden");
+
+    loginSection.classList.remove("hidden");
+
+    passwordInput.value = "";
+
+    loginMessage.textContent = "";
+
+  }
+
+
+  /* =====================================================
+     PROTECTION HTML
+  ===================================================== */
+
+  function escapeHtml(text) {
+
+    return String(text || "")
+
+      .replace(/&/g, "&amp;")
+
+      .replace(/</g, "&lt;")
+
+      .replace(/>/g, "&gt;")
+
+      .replace(/"/g, "&quot;")
+
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  /* =====================================================
+     BOUTONS
+  ===================================================== */
+
+  loginButton.addEventListener(
+    "click",
+    login
+  );
+
+
+  publishButton.addEventListener(
+    "click",
+    publishAnalysis
+  );
+
+
+  logoutButton.addEventListener(
+    "click",
+    logout
+  );
+
+
+  /* =====================================================
+     ENTRÉE = CONNEXION
+  ===================================================== */
+
+  passwordInput.addEventListener(
+    "keydown",
+    function(event) {
+
+      if (event.key === "Enter") {
+
+        login();
+
+      }
+
+    }
+  );
+
+
+  /* =====================================================
+     VÉRIFICATION DE SESSION
+  ===================================================== */
+
+  async function checkSession() {
+
+    const response =
+      await supabaseClient.auth.getSession();
+
+
+    if (
+      response.data &&
+      response.data.session
+    ) {
+
+      showAdmin();
+
+    }
+
+  }
+
+
+  /* =====================================================
+     DÉMARRAGE
+  ===================================================== */
+
+  checkSession();
+
+</script>
 
 </body>
-</html>
+  </html>

@@ -1,7 +1,431 @@
-alter table public.posts
-add column if not exists featured_player text,
-add column if not exists featured_team text,
-add column if not exists featured_goals text,
-add column if not exists featured_assists text,
-add column if not exists featured_goal_ratio text,
-add column if not exists featured_decisive_ratio text;
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Analyse | BETJOKER</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="config.js"></script>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #050505;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 25px 18px;
+      border-bottom: 1px solid rgba(57,255,20,0.2);
+      text-align: center;
+    }
+
+    .back {
+      display: inline-block;
+      margin-bottom: 18px;
+      color: #777;
+      text-decoration: none;
+      font-size: 12px;
+    }
+
+    .back:hover {
+      color: #39ff14;
+    }
+
+    .brand {
+      color: #39ff14;
+      font-size: 30px;
+      font-weight: 900;
+      letter-spacing: 3px;
+    }
+
+    main {
+      width: 100%;
+      max-width: 800px;
+      margin: auto;
+      padding: 25px 15px 50px;
+    }
+
+    .card {
+      background: #0c0c0c;
+      border: 1px solid #222;
+      border-radius: 14px;
+      padding: 22px;
+      margin-bottom: 18px;
+    }
+
+    .sport {
+      color: #39ff14;
+      font-size: 11px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
+    h1 {
+      font-size: 27px;
+      margin-bottom: 8px;
+    }
+
+    .match {
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    .date {
+      color: #777;
+      font-size: 12px;
+      margin-top: 7px;
+    }
+
+    .section-title {
+      color: #39ff14;
+      font-size: 14px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 16px;
+    }
+
+    .player-name {
+      font-size: 23px;
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .player-team {
+      color: #888;
+      font-size: 13px;
+      margin-bottom: 20px;
+    }
+
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .stat {
+      background: #101010;
+      border: 1px solid #202020;
+      border-radius: 9px;
+      padding: 14px;
+    }
+
+    .stat-label {
+      color: #777;
+      font-size: 10px;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+    }
+
+    .stat-value {
+      color: #39ff14;
+      font-size: 16px;
+      font-weight: bold;
+    }
+
+    .analysis {
+      color: #ccc;
+      line-height: 1.7;
+      font-size: 14px;
+      white-space: pre-wrap;
+    }
+
+    .message {
+      text-align: center;
+      padding: 50px 15px;
+      color: #777;
+    }
+
+    .error {
+      color: #ff5555;
+    }
+
+    @media (max-width: 600px) {
+
+      h1 {
+        font-size: 23px;
+      }
+
+      .stats {
+        grid-template-columns: 1fr;
+      }
+
+    }
+
+  </style>
+
+</head>
+
+<body>
+
+<header>
+
+  <a href="index.html" class="back">
+    ← Retour aux analyses
+  </a>
+
+  <div class="brand">
+    BETJOKER
+  </div>
+
+</header>
+
+<main>
+
+  <div id="content">
+
+    <div class="message">
+      Chargement de l'analyse...
+    </div>
+
+  </div>
+
+</main>
+
+<script>
+
+  const db = supabase.createClient(
+    window.SUPABASE_URL,
+    window.SUPABASE_ANON_KEY
+  );
+
+  const content = document.getElementById("content");
+
+  const params = new URLSearchParams(
+    window.location.search
+  );
+
+  const id = params.get("id");
+
+  async function loadAnalysis() {
+
+    if(!id) {
+
+      content.innerHTML = `
+        <div class="message error">
+          Analyse introuvable.
+        </div>
+      `;
+
+      return;
+    }
+
+    const result = await db
+      .from("posts")
+      .select("*")
+      .eq("id", id)
+      .single();
+
+    if(result.error || !result.data) {
+
+      console.error(result.error);
+
+      content.innerHTML = `
+        <div class="message error">
+          Impossible de charger cette analyse.
+        </div>
+      `;
+
+      return;
+    }
+
+    const post = result.data;
+
+    let date = "";
+
+    if(post.date) {
+
+      const d = new Date(
+        post.date + "T00:00:00"
+      );
+
+      date = d.toLocaleDateString("fr-FR");
+
+    }
+
+    let playerSection = "";
+
+    if(post.featured_player) {
+
+      playerSection = `
+
+        <section class="card">
+
+          <div class="section-title">
+            ⭐ JOUEUR À SUIVRE
+          </div>
+
+          <div class="player-name">
+            ${escapeHtml(post.featured_player)}
+          </div>
+
+          ${
+            post.featured_team
+            ? `
+              <div class="player-team">
+                ${escapeHtml(post.featured_team)}
+              </div>
+            `
+            : ""
+          }
+
+          <div class="stats">
+
+            ${
+              post.featured_goals
+              ? `
+                <div class="stat">
+
+                  <div class="stat-label">
+                    Buts
+                  </div>
+
+                  <div class="stat-value">
+                    ⚽ ${escapeHtml(post.featured_goals)}
+                  </div>
+
+                </div>
+              `
+              : ""
+            }
+
+            ${
+              post.featured_assists
+              ? `
+                <div class="stat">
+
+                  <div class="stat-label">
+                    Passes décisives
+                  </div>
+
+                  <div class="stat-value">
+                    🎯 ${escapeHtml(post.featured_assists)}
+                  </div>
+
+                </div>
+              `
+              : ""
+            }
+
+            ${
+              post.featured_goal_ratio
+              ? `
+                <div class="stat">
+
+                  <div class="stat-label">
+                    Ratio but
+                  </div>
+
+                  <div class="stat-value">
+                    ${escapeHtml(post.featured_goal_ratio)}
+                  </div>
+
+                </div>
+              `
+              : ""
+            }
+
+            ${
+              post.featured_decisive_ratio
+              ? `
+                <div class="stat">
+
+                  <div class="stat-label">
+                    Ratio décisif
+                  </div>
+
+                  <div class="stat-value">
+                    ${escapeHtml(post.featured_decisive_ratio)}
+                  </div>
+
+                </div>
+              `
+              : ""
+            }
+
+          </div>
+
+        </section>
+
+      `;
+
+    }
+
+    content.innerHTML = `
+
+      <section class="card">
+
+        <div class="sport">
+          ${escapeHtml(post.sport)}
+        </div>
+
+        <h1>
+          ${escapeHtml(post.title || "Analyse sportive")}
+        </h1>
+
+        <div class="match">
+          ${escapeHtml(post.match)}
+        </div>
+
+        ${
+          date
+          ? `<div class="date">${date}</div>`
+          : ""
+        }
+
+      </section>
+
+      ${playerSection}
+
+      <section class="card">
+
+        <div class="section-title">
+          📝 ANALYSE
+        </div>
+
+        <div class="analysis">
+          ${escapeHtml(post.analysis)}
+        </div>
+
+      </section>
+
+    `;
+
+  }
+
+  function escapeHtml(value) {
+
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+  loadAnalysis();
+
+</script>
+
+</body>
+
+</html>

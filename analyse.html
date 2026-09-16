@@ -1,0 +1,7 @@
+alter table public.posts
+add column if not exists featured_player text,
+add column if not exists featured_team text,
+add column if not exists featured_goals text,
+add column if not exists featured_assists text,
+add column if not exists featured_goal_ratio text,
+add column if not exists featured_decisive_ratio text;

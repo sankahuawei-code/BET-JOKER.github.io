@@ -33,32 +33,24 @@
 
     header {
       padding: 25px 18px;
-      border-bottom: 1px solid rgba(57,255,20,0.2);
       text-align: center;
+      border-bottom: 1px solid rgba(57,255,20,0.2);
     }
 
-    .back {
-      display: inline-block;
-      margin-bottom: 18px;
-      color: #777;
-      text-decoration: none;
-      font-size: 12px;
-    }
-
-    .back:hover {
-      color: #39ff14;
-    }
-
-    .brand {
+    header h1 {
       color: #39ff14;
       font-size: 30px;
-      font-weight: 900;
       letter-spacing: 3px;
     }
 
+    header p {
+      color: #777;
+      margin-top: 7px;
+      font-size: 13px;
+    }
+
     main {
-      width: 100%;
-      max-width: 800px;
+      max-width: 750px;
       margin: auto;
       padding: 25px 15px 50px;
     }
@@ -66,92 +58,141 @@
     .card {
       background: #0c0c0c;
       border: 1px solid #222;
-      border-radius: 14px;
+      border-radius: 12px;
       padding: 22px;
       margin-bottom: 18px;
     }
 
     .sport {
       color: #39ff14;
-      font-size: 11px;
+      font-size: 12px;
       font-weight: bold;
       letter-spacing: 1px;
-      margin-bottom: 12px;
+      margin-bottom: 10px;
+      text-transform: uppercase;
     }
 
-    h1 {
-      font-size: 27px;
-      margin-bottom: 8px;
+    h2 {
+      font-size: 25px;
+      line-height: 1.25;
+      margin-bottom: 10px;
     }
 
     .match {
-      color: #bbb;
-      font-size: 14px;
+      color: #ccc;
+      font-size: 17px;
+      margin-bottom: 8px;
     }
 
     .date {
       color: #777;
       font-size: 12px;
-      margin-top: 7px;
+      margin-bottom: 18px;
+    }
+
+    .confidence {
+      display: inline-block;
+      border: 1px solid rgba(57,255,20,0.4);
+      color: #39ff14;
+      padding: 7px 10px;
+      border-radius: 6px;
+      font-size: 12px;
+      margin-bottom: 20px;
     }
 
     .section-title {
       color: #39ff14;
-      font-size: 14px;
+      font-size: 15px;
       font-weight: bold;
       letter-spacing: 1px;
-      margin-bottom: 16px;
+      margin-bottom: 15px;
+    }
+
+    .player-card {
+      background: #080808;
+      border: 1px solid rgba(57,255,20,0.25);
+      border-radius: 10px;
+      padding: 18px;
+      margin-bottom: 22px;
     }
 
     .player-name {
+      color: white;
       font-size: 23px;
       font-weight: bold;
       margin-bottom: 5px;
     }
 
     .player-team {
-      color: #888;
+      color: #39ff14;
       font-size: 13px;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     .stats {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
+      grid-template-columns: 1fr 1fr;
       gap: 10px;
     }
 
     .stat {
-      background: #101010;
-      border: 1px solid #202020;
-      border-radius: 9px;
-      padding: 14px;
+      background: #111;
+      border: 1px solid #222;
+      border-radius: 7px;
+      padding: 12px;
     }
 
     .stat-label {
       color: #777;
-      font-size: 10px;
-      text-transform: uppercase;
-      margin-bottom: 6px;
+      font-size: 11px;
+      margin-bottom: 5px;
     }
 
     .stat-value {
-      color: #39ff14;
-      font-size: 16px;
+      color: white;
+      font-size: 15px;
       font-weight: bold;
     }
 
+    .analysis-title {
+      color: #39ff14;
+      font-size: 15px;
+      font-weight: bold;
+      letter-spacing: 1px;
+      margin-bottom: 12px;
+    }
+
     .analysis {
-      color: #ccc;
+      color: #ddd;
+      font-size: 15px;
       line-height: 1.7;
-      font-size: 14px;
       white-space: pre-wrap;
+      word-wrap: break-word;
+    }
+
+    .back-button {
+      display: block;
+      width: 100%;
+      text-align: center;
+      text-decoration: none;
+      padding: 12px;
+      border: 1px solid #39ff14;
+      border-radius: 7px;
+      color: #39ff14;
+      margin-top: 20px;
+      font-weight: bold;
+      background: #080808;
+    }
+
+    .back-button:hover {
+      background: #39ff14;
+      color: #050505;
     }
 
     .message {
       text-align: center;
-      padding: 50px 15px;
-      color: #777;
+      color: #888;
+      padding: 30px 10px;
     }
 
     .error {
@@ -160,8 +201,16 @@
 
     @media (max-width: 600px) {
 
-      h1 {
-        font-size: 23px;
+      header h1 {
+        font-size: 26px;
+      }
+
+      .card {
+        padding: 18px;
+      }
+
+      h2 {
+        font-size: 21px;
       }
 
       .stats {
@@ -174,19 +223,20 @@
 
 </head>
 
+
 <body>
+
 
 <header>
 
-  <a href="index.html" class="back">
-    ← Retour aux analyses
-  </a>
+  <h1>BETJOKER</h1>
 
-  <div class="brand">
-    BETJOKER
-  </div>
+  <p>
+    Analyse et statistiques sportives
+  </p>
 
 </header>
+
 
 <main>
 
@@ -200,74 +250,151 @@
 
 </main>
 
+
 <script>
+
+  // =========================
+  // SUPABASE
+  // =========================
 
   const db = supabase.createClient(
     window.SUPABASE_URL,
     window.SUPABASE_ANON_KEY
   );
 
-  const content = document.getElementById("content");
 
-  const params = new URLSearchParams(
-    window.location.search
-  );
+  // =========================
+  // RECUPERER L'ID
+  // =========================
 
-  const id = params.get("id");
+  const params =
+    new URLSearchParams(window.location.search);
+
+  const postId =
+    params.get("id");
+
+
+  const content =
+    document.getElementById("content");
+
+
+  // =========================
+  // ECHAPPEMENT HTML
+  // =========================
+
+  function escapeHtml(value) {
+
+    return String(value ?? "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  // =========================
+  // DATE
+  // =========================
+
+  function formatDate(date) {
+
+    if (!date) {
+      return "";
+    }
+
+    const d =
+      new Date(date + "T00:00:00");
+
+    return d.toLocaleDateString(
+      "fr-FR",
+      {
+        day: "2-digit",
+        month: "2-digit",
+        year: "numeric"
+      }
+    );
+
+  }
+
+
+  // =========================
+  // CHARGER L'ANALYSE
+  // =========================
 
   async function loadAnalysis() {
 
-    if(!id) {
+    if (!postId) {
 
       content.innerHTML = `
-        <div class="message error">
-          Analyse introuvable.
+        <div class="card">
+          <div class="message error">
+            Analyse introuvable.
+          </div>
+
+          <a
+            href="index.html"
+            class="back-button"
+          >
+            ← RETOUR AUX ANALYSES
+          </a>
         </div>
       `;
 
       return;
     }
 
-    const result = await db
-      .from("posts")
-      .select("*")
-      .eq("id", id)
-      .single();
 
-    if(result.error || !result.data) {
+    const result =
+      await db
+        .from("posts")
+        .select("*")
+        .eq("id", postId)
+        .single();
+
+
+    if (result.error || !result.data) {
 
       console.error(result.error);
 
       content.innerHTML = `
-        <div class="message error">
-          Impossible de charger cette analyse.
+        <div class="card">
+
+          <div class="message error">
+            Impossible de charger cette analyse.
+          </div>
+
+          <a
+            href="index.html"
+            class="back-button"
+          >
+            ← RETOUR AUX ANALYSES
+          </a>
+
         </div>
       `;
 
       return;
     }
 
-    const post = result.data;
 
-    let date = "";
+    const post =
+      result.data;
 
-    if(post.date) {
 
-      const d = new Date(
-        post.date + "T00:00:00"
-      );
+    // =========================
+    // JOUEUR
+    // =========================
 
-      date = d.toLocaleDateString("fr-FR");
+    let playerHtml = "";
 
-    }
 
-    let playerSection = "";
+    if (post.featured_player) {
 
-    if(post.featured_player) {
+      playerHtml = `
 
-      playerSection = `
-
-        <section class="card">
+        <div class="player-card">
 
           <div class="section-title">
             ⭐ JOUEUR À SUIVRE
@@ -279,152 +406,185 @@
 
           ${
             post.featured_team
-            ? `
-              <div class="player-team">
-                ${escapeHtml(post.featured_team)}
-              </div>
-            `
-            : ""
+              ? `
+                <div class="player-team">
+                  ${escapeHtml(post.featured_team)}
+                </div>
+              `
+              : ""
           }
+
 
           <div class="stats">
 
             ${
               post.featured_goals
-              ? `
-                <div class="stat">
+                ? `
+                  <div class="stat">
 
-                  <div class="stat-label">
-                    Buts
+                    <div class="stat-label">
+                      ⚽ BUTS
+                    </div>
+
+                    <div class="stat-value">
+                      ${escapeHtml(post.featured_goals)}
+                    </div>
+
                   </div>
-
-                  <div class="stat-value">
-                    ⚽ ${escapeHtml(post.featured_goals)}
-                  </div>
-
-                </div>
-              `
-              : ""
+                `
+                : ""
             }
+
 
             ${
               post.featured_assists
-              ? `
-                <div class="stat">
+                ? `
+                  <div class="stat">
 
-                  <div class="stat-label">
-                    Passes décisives
+                    <div class="stat-label">
+                      🎯 PASSES DÉCISIVES
+                    </div>
+
+                    <div class="stat-value">
+                      ${escapeHtml(post.featured_assists)}
+                    </div>
+
                   </div>
-
-                  <div class="stat-value">
-                    🎯 ${escapeHtml(post.featured_assists)}
-                  </div>
-
-                </div>
-              `
-              : ""
+                `
+                : ""
             }
+
 
             ${
               post.featured_goal_ratio
-              ? `
-                <div class="stat">
+                ? `
+                  <div class="stat">
 
-                  <div class="stat-label">
-                    Ratio but
+                    <div class="stat-label">
+                      ⚽ RATIO BUT
+                    </div>
+
+                    <div class="stat-value">
+                      ${escapeHtml(post.featured_goal_ratio)}
+                    </div>
+
                   </div>
-
-                  <div class="stat-value">
-                    ${escapeHtml(post.featured_goal_ratio)}
-                  </div>
-
-                </div>
-              `
-              : ""
+                `
+                : ""
             }
+
 
             ${
               post.featured_decisive_ratio
-              ? `
-                <div class="stat">
+                ? `
+                  <div class="stat">
 
-                  <div class="stat-label">
-                    Ratio décisif
+                    <div class="stat-label">
+                      🔥 RATIO DÉCISIF
+                    </div>
+
+                    <div class="stat-value">
+                      ${escapeHtml(post.featured_decisive_ratio)}
+                    </div>
+
                   </div>
-
-                  <div class="stat-value">
-                    ${escapeHtml(post.featured_decisive_ratio)}
-                  </div>
-
-                </div>
-              `
-              : ""
+                `
+                : ""
             }
 
           </div>
 
-        </section>
+        </div>
 
       `;
 
     }
 
+
+    // =========================
+    // CONFIANCE
+    // =========================
+
+    const confidenceHtml =
+      post.confidence
+        ? `
+          <div class="confidence">
+            ${escapeHtml(post.confidence)}
+          </div>
+        `
+        : "";
+
+
+    // =========================
+    // AFFICHAGE
+    // =========================
+
     content.innerHTML = `
 
-      <section class="card">
+      <div class="card">
 
         <div class="sport">
           ${escapeHtml(post.sport)}
         </div>
 
-        <h1>
-          ${escapeHtml(post.title || "Analyse sportive")}
-        </h1>
+        <h2>
+          ${escapeHtml(post.title || "Analyse")}
+        </h2>
 
         <div class="match">
           ${escapeHtml(post.match)}
         </div>
 
         ${
-          date
-          ? `<div class="date">${date}</div>`
-          : ""
+          post.date
+            ? `
+              <div class="date">
+                📅 ${formatDate(post.date)}
+              </div>
+            `
+            : ""
         }
 
-      </section>
+        ${confidenceHtml}
 
-      ${playerSection}
+        ${playerHtml}
 
-      <section class="card">
-
-        <div class="section-title">
-          📝 ANALYSE
+        <div class="analysis-title">
+          ANALYSE
         </div>
 
         <div class="analysis">
           ${escapeHtml(post.analysis)}
         </div>
 
-      </section>
+        <a
+          href="index.html"
+          class="back-button"
+        >
+          ← RETOUR AUX ANALYSES
+        </a>
+
+      </div>
 
     `;
 
-  }
+    // Modifier le titre de l'onglet
 
-  function escapeHtml(value) {
-
-    return String(value || "")
-      .replace(/&/g, "&amp;")
-      .replace(/</g, "&lt;")
-      .replace(/>/g, "&gt;")
-      .replace(/"/g, "&quot;")
-      .replace(/'/g, "&#039;");
+    document.title =
+      (post.title || "Analyse") +
+      " | BETJOKER";
 
   }
+
+
+  // =========================
+  // INITIALISATION
+  // =========================
 
   loadAnalysis();
 
 </script>
+
 
 </body>
 

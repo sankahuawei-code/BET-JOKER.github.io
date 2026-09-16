@@ -1,291 +1,825 @@
 <!DOCTYPE html>
 <html lang="fr">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Admin - JOKER ANALYSIS</title>
 
-<style>
-body{
-  margin:0;
-  background:#050505;
-  color:white;
-  font-family:Arial,sans-serif;
-}
-main{
-  max-width:800px;
-  margin:auto;
-  padding:25px 15px;
-}
-h1,h2{color:#39ff14}
-.card{
-  background:#111;
-  border:1px solid #333;
-  border-radius:12px;
-  padding:20px;
-  margin-bottom:20px;
-}
-input,textarea,select{
-  width:100%;
-  box-sizing:border-box;
-  padding:12px;
-  margin:7px 0 14px;
-  background:#080808;
-  color:white;
-  border:1px solid #444;
-  border-radius:7px;
-}
-textarea{min-height:150px}
-button{
-  width:100%;
-  padding:13px;
-  border:0;
-  border-radius:7px;
-  background:#39ff14;
-  color:#000;
-  font-weight:bold;
-  cursor:pointer;
-}
-.danger{background:#b00020;color:white}
-.hidden{display:none}
-.message{margin-top:12px}
-.error{color:#ff4444}
-.success{color:#39ff14}
-.post{
-  border-top:1px solid #333;
-  padding:15px 0;
-}
-small{color:#888}
-a{color:#39ff14}
-</style>
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Admin | BETJOKER</title>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script src="config.js"></script>
+
+  <style>
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      background: #050505;
+      color: white;
+      font-family: Arial, Helvetica, sans-serif;
+      min-height: 100vh;
+    }
+
+    header {
+      padding: 25px 18px;
+      text-align: center;
+      border-bottom: 1px solid rgba(57,255,20,0.2);
+    }
+
+    header h1 {
+      color: #39ff14;
+      font-size: 30px;
+      letter-spacing: 3px;
+    }
+
+    main {
+      max-width: 700px;
+      margin: auto;
+      padding: 25px 15px 50px;
+    }
+
+    .card {
+      background: #0c0c0c;
+      border: 1px solid #222;
+      border-radius: 12px;
+      padding: 20px;
+      margin-bottom: 18px;
+    }
+
+    h2 {
+      color: #39ff14;
+      font-size: 16px;
+      margin-bottom: 18px;
+      letter-spacing: 1px;
+    }
+
+    label {
+      display: block;
+      color: #aaa;
+      font-size: 12px;
+      margin-bottom: 6px;
+      margin-top: 14px;
+    }
+
+    input,
+    textarea,
+    select {
+      width: 100%;
+      background: #101010;
+      border: 1px solid #292929;
+      border-radius: 7px;
+      color: white;
+      padding: 11px;
+      outline: none;
+      font-family: inherit;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      border-color: #39ff14;
+    }
+
+    textarea {
+      min-height: 150px;
+      resize: vertical;
+    }
+
+    button {
+      width: 100%;
+      margin-top: 18px;
+      padding: 12px;
+      background: #39ff14;
+      color: #050505;
+      border: none;
+      border-radius: 7px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      box-shadow: 0 0 15px rgba(57,255,20,0.3);
+    }
+
+    .secondary {
+      background: #111;
+      color: #39ff14;
+      border: 1px solid #39ff14;
+    }
+
+    .post-admin {
+      border-top: 1px solid #222;
+      padding: 15px 0;
+    }
+
+    .post-admin:first-child {
+      border-top: none;
+    }
+
+    .post-title {
+      font-weight: bold;
+      margin-bottom: 5px;
+    }
+
+    .post-match {
+      color: #888;
+      font-size: 12px;
+    }
+
+    .delete {
+      background: transparent;
+      color: #ff5555;
+      border: 1px solid #552222;
+      margin-top: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+
+    .message {
+      padding: 12px;
+      margin-top: 12px;
+      border-radius: 7px;
+      font-size: 13px;
+    }
+
+    .success {
+      background: #0c1d09;
+      color: #39ff14;
+    }
+
+    .error {
+      background: #1d0909;
+      color: #ff5555;
+    }
+
+    .hint {
+      color: #666;
+      font-size: 11px;
+      margin-top: 5px;
+    }
+
+  </style>
+
 </head>
 
 <body>
+
+<header>
+
+  <h1>BETJOKER ADMIN</h1>
+
+</header>
+
 <main>
 
-<h1>JOKER ANALYSIS — ADMIN</h1>
+  <!-- CONNEXION -->
 
-<div id="login" class="card">
-<h2>Connexion</h2>
+  <section id="loginCard" class="card">
 
-<label>Email</label>
-<input id="email" type="email" placeholder="Ton adresse e-mail">
+    <h2>CONNEXION</h2>
 
-<label>Mot de passe</label>
-<input id="password" type="password" placeholder="Ton mot de passe">
+    <label>
+      Email
+    </label>
 
-<button id="loginBtn">SE CONNECTER</button>
+    <input
+      id="email"
+      type="email"
+      placeholder="Email"
+    >
 
-<p id="loginMsg" class="message"></p>
-</div>
+    <label>
+      Mot de passe
+    </label>
 
+    <input
+      id="password"
+      type="password"
+      placeholder="Mot de passe"
+    >
 
-<div id="admin" class="hidden">
+    <button id="loginButton">
+      SE CONNECTER
+    </button>
 
-<div class="card">
-<h2>Publier une analyse</h2>
+    <div id="loginMessage"></div>
 
-<label>Sport</label>
-<input id="sport" placeholder="Football">
-
-<label>Match / événement</label>
-<input id="match" placeholder="Marseille - Lyon">
-
-<label>Titre</label>
-<input id="title" placeholder="Titre de l'analyse">
-
-<label>Date</label>
-<input id="date" type="date">
-
-<label>Confiance</label>
-<input id="confidence" placeholder="Élevée">
-
-<label>Catégorie</label>
-<select id="category">
-<option>ANALYSE</option>
-<option>STATISTIQUES</option>
-<option>ACTUALITÉ</option>
-</select>
-
-<label>Analyse</label>
-<textarea id="analysis" placeholder="Écris ton analyse ici..."></textarea>
-
-<button id="publishBtn">PUBLIER L'ANALYSE</button>
-
-<p id="publishMsg" class="message"></p>
-</div>
+  </section>
 
 
-<div class="card">
-<h2>Analyses publiées</h2>
-<div id="posts">Chargement...</div>
-</div>
+  <!-- ADMIN -->
+
+  <section id="adminArea" class="hidden">
+
+    <section class="card">
+
+      <h2>
+        NOUVELLE ANALYSE
+      </h2>
+
+      <label>
+        Sport
+      </label>
+
+      <select id="sport">
+
+        <option value="Football">
+          Football
+        </option>
+
+        <option value="Basketball">
+          Basketball
+        </option>
+
+        <option value="Tennis">
+          Tennis
+        </option>
+
+        <option value="Hockey">
+          Hockey
+        </option>
+
+        <option value="Rugby">
+          Rugby
+        </option>
+
+      </select>
 
 
-<div class="card">
-<button id="logoutBtn" class="danger">SE DÉCONNECTER</button>
-</div>
+      <label>
+        Match
+      </label>
 
-</div>
+      <input
+        id="match"
+        type="text"
+        placeholder="Ex : OM - PSG"
+      >
 
-<p><a href="index.html">← Retour au site</a></p>
+
+      <label>
+        Titre
+      </label>
+
+      <input
+        id="title"
+        type="text"
+        placeholder="Titre de l'analyse"
+      >
+
+
+      <label>
+        Date
+      </label>
+
+      <input
+        id="date"
+        type="date"
+      >
+
+
+      <label>
+        Catégorie
+      </label>
+
+      <input
+        id="category"
+        type="text"
+        value="ANALYSE"
+      >
+
+
+      <label>
+        Confiance
+      </label>
+
+      <input
+        id="confidence"
+        type="text"
+        placeholder="Ex : Élevée"
+      >
+
+
+      <label>
+        Analyse
+      </label>
+
+      <textarea
+        id="analysis"
+        placeholder="Écris ton analyse ici..."
+      ></textarea>
+
+
+    </section>
+
+
+    <!-- JOUEUR -->
+
+    <section class="card">
+
+      <h2>
+        ⭐ JOUEUR À SUIVRE
+      </h2>
+
+      <div class="hint">
+        Cette partie est facultative. Tu peux la laisser vide.
+      </div>
+
+
+      <label>
+        Nom du joueur
+      </label>
+
+      <input
+        id="featuredPlayer"
+        type="text"
+        placeholder="Ex : Nom du joueur"
+      >
+
+
+      <label>
+        Équipe
+      </label>
+
+      <input
+        id="featuredTeam"
+        type="text"
+        placeholder="Ex : OM"
+      >
+
+
+      <label>
+        ⚽ Buts
+      </label>
+
+      <input
+        id="featuredGoals"
+        type="text"
+        placeholder="Ex : 8"
+      >
+
+
+      <label>
+        🎯 Passes décisives
+      </label>
+
+      <input
+        id="featuredAssists"
+        type="text"
+        placeholder="Ex : 4"
+      >
+
+
+      <label>
+        ⚽ Ratio but
+      </label>
+
+      <input
+        id="featuredGoalRatio"
+        type="text"
+        placeholder="Ex : 1 but / 1,8 match"
+      >
+
+
+      <label>
+        🔥 Ratio décisif
+      </label>
+
+      <input
+        id="featuredDecisiveRatio"
+        type="text"
+        placeholder="Ex : 1 contribution / 1,2 match"
+      >
+
+
+      <button id="publishButton">
+        PUBLIER L'ANALYSE
+      </button>
+
+      <div id="publishMessage"></div>
+
+    </section>
+
+
+    <!-- ANALYSES EXISTANTES -->
+
+    <section class="card">
+
+      <h2>
+        ANALYSES PUBLIÉES
+      </h2>
+
+      <div id="postsList">
+        Chargement...
+      </div>
+
+    </section>
+
+
+    <button
+      id="logoutButton"
+      class="secondary"
+    >
+      SE DÉCONNECTER
+    </button>
+
+  </section>
 
 </main>
 
 
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script src="config.js"></script>
-
 <script>
 
-const db = supabase.createClient(
-  window.SUPABASE_URL,
-  window.SUPABASE_ANON_KEY
-);
-
-const login = document.getElementById("login");
-const admin = document.getElementById("admin");
-
-document.getElementById("loginBtn").onclick = async () => {
-
-  const email = document.getElementById("email").value.trim();
-  const password = document.getElementById("password").value;
-
-  if(!email || !password){
-    document.getElementById("loginMsg").textContent =
-      "Entre ton email et ton mot de passe.";
-    document.getElementById("loginMsg").className = "message error";
-    return;
-  }
-
-  const {error} = await db.auth.signInWithPassword({
-    email: email,
-    password: password
-  });
-
-  if(error){
-    document.getElementById("loginMsg").textContent =
-      "Erreur : " + error.message;
-    document.getElementById("loginMsg").className = "message error";
-    return;
-  }
-
-  login.classList.add("hidden");
-  admin.classList.remove("hidden");
-  loadPosts();
-};
+  const db = supabase.createClient(
+    window.SUPABASE_URL,
+    window.SUPABASE_ANON_KEY
+  );
 
 
-document.getElementById("publishBtn").onclick = async () => {
+  const loginCard =
+    document.getElementById("loginCard");
 
-  const data = {
-    sport: document.getElementById("sport").value.trim(),
-    match: document.getElementById("match").value.trim(),
-    title: document.getElementById("title").value.trim() || null,
-    date: document.getElementById("date").value || null,
-    confidence: document.getElementById("confidence").value.trim() || null,
-    category: document.getElementById("category").value,
-    analysis: document.getElementById("analysis").value.trim(),
-    result: "pending"
+  const adminArea =
+    document.getElementById("adminArea");
+
+
+  const loginButton =
+    document.getElementById("loginButton");
+
+  const logoutButton =
+    document.getElementById("logoutButton");
+
+
+  loginButton.onclick = async function() {
+
+    const email =
+      document.getElementById("email").value.trim();
+
+    const password =
+      document.getElementById("password").value;
+
+
+    const result =
+      await db.auth.signInWithPassword({
+        email: email,
+        password: password
+      });
+
+
+    if(result.error) {
+
+      showMessage(
+        "loginMessage",
+        result.error.message,
+        "error"
+      );
+
+      return;
+    }
+
+
+    showAdmin();
+
   };
 
-  if(!data.sport || !data.match || !data.analysis){
-    document.getElementById("publishMsg").textContent =
-      "Sport, match et analyse sont obligatoires.";
-    document.getElementById("publishMsg").className = "message error";
-    return;
-  }
-const {data: userData} = await db.auth.getUser();
-console.log("UTILISATEUR CONNECTÉ :", userData.user);
-  const {error} = await db.from("posts").insert(data);
 
-  if(error){
-    document.getElementById("publishMsg").textContent =
-      "Erreur : " + error.message;
-    document.getElementById("publishMsg").className = "message error";
-    return;
-  }
+  logoutButton.onclick = async function() {
 
-  document.getElementById("publishMsg").textContent =
-    "Analyse publiée !";
-  document.getElementById("publishMsg").className = "message success";
+    await db.auth.signOut();
 
-  document.getElementById("analysis").value = "";
+    location.reload();
 
-  loadPosts();
-};
+  };
 
 
-async function loadPosts(){
+  async function checkSession() {
 
-  const {data,error} = await db
-    .from("posts")
-    .select("*")
-    .order("created_at",{ascending:false});
+    const result =
+      await db.auth.getSession();
 
-  const box = document.getElementById("posts");
+    if(result.data.session) {
 
-  if(error){
-    box.innerHTML = "<p class='error'>" + error.message + "</p>";
-    return;
+      showAdmin();
+
+    }
+
   }
 
-  if(!data.length){
-    box.innerHTML = "<small>Aucune analyse publiée.</small>";
-    return;
+
+  function showAdmin() {
+
+    loginCard.classList.add("hidden");
+
+    adminArea.classList.remove("hidden");
+
+    loadPosts();
+
   }
 
-  box.innerHTML = "";
 
-  data.forEach(post => {
+  document.getElementById("publishButton").onclick =
+    async function() {
 
-    const div = document.createElement("div");
-    div.className = "post";
+      const post = {
 
-    div.innerHTML = `
-      <h3>${post.title || "Analyse sportive"}</h3>
-      <small>${post.sport} — ${post.match}</small>
-      <p>${post.analysis}</p>
-      <button class="danger">SUPPRIMER</button>
-    `;
+        sport:
+          document.getElementById("sport").value,
 
-    div.querySelector("button").onclick = async () => {
+        match:
+          document.getElementById("match").value.trim(),
 
-      if(!confirm("Supprimer cette analyse ?")) return;
+        title:
+          document.getElementById("title").value.trim() || null,
 
-      await db.from("posts").delete().eq("id",post.id);
+        date:
+          document.getElementById("date").value || null,
+
+        category:
+          document.getElementById("category").value.trim() || "ANALYSE",
+
+        confidence:
+          document.getElementById("confidence").value.trim() || null,
+
+        analysis:
+          document.getElementById("analysis").value.trim(),
+
+        result:
+          "pending",
+
+        featured_player:
+          document.getElementById("featuredPlayer").value.trim() || null,
+
+        featured_team:
+          document.getElementById("featuredTeam").value.trim() || null,
+
+        featured_goals:
+          document.getElementById("featuredGoals").value.trim() || null,
+
+        featured_assists:
+          document.getElementById("featuredAssists").value.trim() || null,
+
+        featured_goal_ratio:
+          document.getElementById("featuredGoalRatio").value.trim() || null,
+
+        featured_decisive_ratio:
+          document.getElementById("featuredDecisiveRatio").value.trim() || null
+
+      };
+
+
+      if(!post.match || !post.analysis) {
+
+        showMessage(
+          "publishMessage",
+          "Le match et l'analyse sont obligatoires.",
+          "error"
+        );
+
+        return;
+      }
+
+
+      const result =
+        await db
+          .from("posts")
+          .insert(post);
+
+
+      if(result.error) {
+
+        console.error(result.error);
+
+        showMessage(
+          "publishMessage",
+          "Erreur : " + result.error.message,
+          "error"
+        );
+
+        return;
+      }
+
+
+      showMessage(
+        "publishMessage",
+        "Analyse publiée !",
+        "success"
+      );
+
+
+      document
+        .getElementById("match")
+        .value = "";
+
+      document
+        .getElementById("title")
+        .value = "";
+
+      document
+        .getElementById("date")
+        .value = "";
+
+      document
+        .getElementById("confidence")
+        .value = "";
+
+      document
+        .getElementById("analysis")
+        .value = "";
+
+      document
+        .getElementById("featuredPlayer")
+        .value = "";
+
+      document
+        .getElementById("featuredTeam")
+        .value = "";
+
+      document
+        .getElementById("featuredGoals")
+        .value = "";
+
+      document
+        .getElementById("featuredAssists")
+        .value = "";
+
+      document
+        .getElementById("featuredGoalRatio")
+        .value = "";
+
+      document
+        .getElementById("featuredDecisiveRatio")
+        .value = "";
+
 
       loadPosts();
+
     };
 
-    box.appendChild(div);
-  });
-}
+
+  async function loadPosts() {
+
+    const container =
+      document.getElementById("postsList");
 
 
-document.getElementById("logoutBtn").onclick = async () => {
+    const result =
+      await db
+        .from("posts")
+        .select("*")
+        .order("created_at", {
+          ascending: false
+        });
 
-  await db.auth.signOut();
 
-  admin.classList.add("hidden");
-  login.classList.remove("hidden");
-};
+    if(result.error) {
+
+      container.innerHTML =
+        `<div class="message error">
+          Impossible de charger les analyses.
+        </div>`;
+
+      return;
+    }
 
 
-async function checkSession(){
+    const posts =
+      result.data || [];
 
-  const {data} = await db.auth.getSession();
 
-  if(data.session){
-    login.classList.add("hidden");
-    admin.classList.remove("hidden");
-    loadPosts();
+    if(posts.length === 0) {
+
+      container.innerHTML =
+        `<div class="message">
+          Aucune analyse.
+        </div>`;
+
+      return;
+    }
+
+
+    container.innerHTML = "";
+
+
+    posts.forEach(function(post) {
+
+      const div =
+        document.createElement("div");
+
+      div.className = "post-admin";
+
+
+      div.innerHTML = `
+
+        <div class="post-title">
+          ${escapeHtml(post.title || "Analyse")}
+        </div>
+
+        <div class="post-match">
+          ${escapeHtml(post.match)}
+        </div>
+
+        <button
+          class="delete"
+          data-id="${escapeHtml(post.id)}"
+        >
+          SUPPRIMER
+        </button>
+
+      `;
+
+
+      div
+        .querySelector(".delete")
+        .onclick = function() {
+
+          deletePost(post.id);
+
+        };
+
+
+      container.appendChild(div);
+
+    });
+
   }
-}
 
-checkSession();
+
+  async function deletePost(id) {
+
+    if(!confirm("Supprimer cette analyse ?")) {
+      return;
+    }
+
+
+    const result =
+      await db
+        .from("posts")
+        .delete()
+        .eq("id", id);
+
+
+    if(result.error) {
+
+      alert(
+        "Erreur : " + result.error.message
+      );
+
+      return;
+    }
+
+
+    loadPosts();
+
+  }
+
+
+  function showMessage(
+    elementId,
+    text,
+    type
+  ) {
+
+    const element =
+      document.getElementById(elementId);
+
+    element.innerHTML = `
+      <div class="message ${type}">
+        ${escapeHtml(text)}
+      </div>
+    `;
+
+  }
+
+
+  function escapeHtml(value) {
+
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+
+  }
+
+
+  checkSession();
 
 </script>
 
 </body>
+
 </html>

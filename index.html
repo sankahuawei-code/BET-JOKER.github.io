@@ -23,7 +23,67 @@
       min-height: 100vh;
     }
 
-    /* HEADER */
+    /* =========================
+       AVERTISSEMENT 18+
+    ========================= */
+
+    .age-warning {
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.97);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .age-box {
+      width: 100%;
+      max-width: 450px;
+      background: #0b0b0b;
+      border: 2px solid #39ff14;
+      border-radius: 12px;
+      padding: 30px 20px;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(57, 255, 20, 0.25);
+    }
+
+    .age-title {
+      color: #39ff14;
+      font-size: 20px;
+      font-weight: bold;
+      margin-bottom: 20px;
+      line-height: 1.3;
+    }
+
+    .age-box p {
+      color: #ccc;
+      font-size: 14px;
+      line-height: 1.6;
+      margin-bottom: 12px;
+    }
+
+    .age-box button {
+      margin-top: 15px;
+      padding: 13px 22px;
+      background: #39ff14;
+      color: #000;
+      border: none;
+      border-radius: 6px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 13px;
+    }
+
+    .age-box button:hover {
+      box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
+    }
+
+    /* =========================
+       HEADER
+    ========================= */
+
     header {
       position: relative;
       text-align: center;
@@ -74,7 +134,10 @@
       letter-spacing: 1px;
     }
 
-    /* MENU */
+    /* =========================
+       MENU SPORTS
+    ========================= */
+
     .sport-menu {
       display: none;
       position: absolute;
@@ -112,7 +175,10 @@
       color: #39ff14;
     }
 
-    /* CONTENT */
+    /* =========================
+       CONTENU
+    ========================= */
+
     main {
       width: 100%;
       max-width: 900px;
@@ -128,12 +194,15 @@
       letter-spacing: 1px;
     }
 
-    /* CARDS */
     .posts {
       display: flex;
       flex-direction: column;
       gap: 18px;
     }
+
+    /* =========================
+       CARTES ANALYSES
+    ========================= */
 
     .post {
       background: #0c0c0c;
@@ -237,7 +306,10 @@
       background: rgba(255, 75, 75, 0.08);
     }
 
-    /* LOADING / EMPTY */
+    /* =========================
+       CHARGEMENT
+    ========================= */
+
     .message {
       text-align: center;
       padding: 40px 15px;
@@ -249,8 +321,43 @@
       color: #39ff14;
     }
 
-    /* MOBILE */
+    /* =========================
+       PRÉVENTION
+    ========================= */
+
+    .prevention-footer {
+      margin-top: 30px;
+      padding: 30px 20px;
+      text-align: center;
+      border-top: 1px solid #222;
+      background: #080808;
+      color: #888;
+      font-size: 12px;
+      line-height: 1.7;
+    }
+
+    .prevention-footer .warning-title {
+      color: #39ff14;
+      font-size: 14px;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .prevention-footer p {
+      margin-top: 8px;
+    }
+
+    .prevention-footer .phone {
+      color: #39ff14;
+      font-weight: bold;
+    }
+
+    /* =========================
+       MOBILE
+    ========================= */
+
     @media (max-width: 600px) {
+
       header {
         padding-top: 40px;
       }
@@ -279,45 +386,106 @@
       .analysis {
         font-size: 13px;
       }
+
+      .age-title {
+        font-size: 18px;
+      }
     }
   </style>
 </head>
 
 <body>
 
+  <!-- =========================
+       AVERTISSEMENT 18+
+  ========================= -->
+
+  <div id="age-warning" class="age-warning">
+
+    <div class="age-box">
+
+      <div class="age-title">
+        🔞 SITE INTERDIT AUX MOINS DE 18 ANS
+      </div>
+
+      <p>
+        Les jeux d'argent et les paris sportifs sont interdits aux mineurs.
+      </p>
+
+      <p>
+        Ce site contient des contenus relatifs aux paris sportifs.
+      </p>
+
+      <button onclick="closeAgeWarning()">
+        J'AI 18 ANS OU PLUS
+      </button>
+
+    </div>
+
+  </div>
+
+
+  <!-- =========================
+       HEADER
+  ========================= -->
+
   <header>
 
-    <button class="menu-button" onclick="toggleMenu()">☰</button>
+    <button
+      class="menu-button"
+      onclick="toggleMenu()">
+      ☰
+    </button>
 
-    <a href="admin.html" class="admin-link">ESPACE ADMIN</a>
+    <a
+      href="admin.html"
+      class="admin-link">
+      ESPACE ADMIN
+    </a>
 
-    <div class="sport-menu" id="sportMenu">
-      <button class="active" onclick="filterSport('Toutes les analyses', this)">
+    <!-- MENU -->
+
+    <div
+      class="sport-menu"
+      id="sportMenu">
+
+      <button
+        class="active"
+        onclick="filterSport('Toutes les analyses', this)">
         Toutes les analyses
       </button>
 
-      <button onclick="filterSport('Football', this)">
+      <button
+        onclick="filterSport('Football', this)">
         ⚽ Football
       </button>
 
-      <button onclick="filterSport('Basketball', this)">
+      <button
+        onclick="filterSport('Basketball', this)">
         🏀 Basketball
       </button>
 
-      <button onclick="filterSport('Tennis', this)">
+      <button
+        onclick="filterSport('Tennis', this)">
         🎾 Tennis
       </button>
 
-      <button onclick="filterSport('Hockey', this)">
+      <button
+        onclick="filterSport('Hockey', this)">
         🏒 Hockey
       </button>
 
-      <button onclick="filterSport('Rugby', this)">
+      <button
+        onclick="filterSport('Rugby', this)">
         🏉 Rugby
       </button>
+
     </div>
 
-    <div class="logo">BETJOKER</div>
+
+    <div class="logo">
+      BETJOKER
+    </div>
 
     <div class="subtitle">
       Analyses et statistiques sportives
@@ -325,37 +493,121 @@
 
   </header>
 
+
+  <!-- =========================
+       ANALYSES
+  ========================= -->
+
   <main>
 
-    <div class="section-title" id="sectionTitle">
+    <div
+      class="section-title"
+      id="sectionTitle">
       DERNIÈRES ANALYSES
     </div>
 
-    <div class="posts" id="posts">
+    <div
+      class="posts"
+      id="posts">
+
       <div class="message loading">
         Chargement des analyses...
       </div>
+
     </div>
 
   </main>
 
+
+  <!-- =========================
+       PRÉVENTION
+  ========================= -->
+
+  <footer class="prevention-footer">
+
+    <div class="warning-title">
+      🔞 JOUER COMPORTE DES RISQUES
+    </div>
+
+    <p>
+      Les jeux d'argent et les paris sportifs sont interdits aux moins de 18 ans.
+    </p>
+
+    <p>
+      Besoin d'aide ou envie de parler de votre pratique ?
+    </p>
+
+    <p>
+      Joueurs Info Service :
+      <span class="phone">
+        09 74 75 13 13
+      </span>
+    </p>
+
+    <p>
+      Jouez avec modération. Ne misez jamais plus que ce que vous pouvez vous permettre de perdre.
+    </p>
+
+  </footer>
+
+
+  <!-- =========================
+       JAVASCRIPT
+  ========================= -->
+
   <script>
-    const supabaseClient = window.supabase.createClient(
-      window.SUPABASE_URL,
-      window.SUPABASE_ANON_KEY
-    );
+
+    const supabaseClient =
+      window.supabase.createClient(
+        window.SUPABASE_URL,
+        window.SUPABASE_ANON_KEY
+      );
+
 
     let allPosts = [];
-    let currentSport = "Toutes les analyses";
+
+    let currentSport =
+      "Toutes les analyses";
+
+
+    /* =========================
+       AVERTISSEMENT
+    ========================= */
+
+    function closeAgeWarning() {
+
+      document
+        .getElementById("age-warning")
+        .style.display = "none";
+
+    }
+
+
+    /* =========================
+       MENU
+    ========================= */
 
     function toggleMenu() {
+
       document
         .getElementById("sportMenu")
         .classList.toggle("active");
+
     }
 
+
+    /* =========================
+       SÉCURITÉ HTML
+    ========================= */
+
     function escapeHtml(value) {
-      if (value === null || value === undefined) return "";
+
+      if (
+        value === null ||
+        value === undefined
+      ) {
+        return "";
+      }
 
       return String(value)
         .replace(/&/g, "&amp;")
@@ -363,144 +615,276 @@
         .replace(/>/g, "&gt;")
         .replace(/"/g, "&quot;")
         .replace(/'/g, "&#039;");
+
     }
+
+
+    /* =========================
+       DATE
+    ========================= */
 
     function formatDate(date) {
-      if (!date) return "";
 
-      const d = new Date(date + "T00:00:00");
+      if (!date) {
+        return "";
+      }
 
-      if (isNaN(d.getTime())) return escapeHtml(date);
+      const d =
+        new Date(date + "T00:00:00");
 
-      return d.toLocaleDateString("fr-FR", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-      });
+      if (isNaN(d.getTime())) {
+        return escapeHtml(date);
+      }
+
+      return d.toLocaleDateString(
+        "fr-FR",
+        {
+          day: "2-digit",
+          month: "2-digit",
+          year: "numeric"
+        }
+      );
+
     }
 
-    function displayPosts(posts) {
-      const container = document.getElementById("posts");
 
-      if (!posts || posts.length === 0) {
+    /* =========================
+       AFFICHAGE
+    ========================= */
+
+    function displayPosts(posts) {
+
+      const container =
+        document.getElementById("posts");
+
+
+      if (
+        !posts ||
+        posts.length === 0
+      ) {
+
         container.innerHTML = `
           <div class="message">
             Aucune analyse disponible pour le moment.
           </div>
         `;
+
         return;
       }
 
-      container.innerHTML = posts.map(post => {
 
-        const sport = escapeHtml(post.sport);
-        const match = escapeHtml(post.match);
-        const title = escapeHtml(post.title);
-        const analysis = escapeHtml(post.analysis);
-        const category = escapeHtml(post.category || "ANALYSE");
-        const confidence = escapeHtml(post.confidence);
-        const date = formatDate(post.date);
-        const result = post.result || "pending";
+      container.innerHTML =
+        posts.map(post => {
 
-        let resultText = "En attente";
+          const sport =
+            escapeHtml(post.sport);
 
-        if (result === "win") {
-          resultText = "Résultat positif";
-        }
+          const match =
+            escapeHtml(post.match);
 
-        if (result === "loss") {
-          resultText = "Résultat négatif";
-        }
+          const title =
+            escapeHtml(post.title);
 
-        return `
-          <article class="post">
+          const analysis =
+            escapeHtml(post.analysis);
 
-            <div class="post-top">
-              <div class="sport">${sport}</div>
-              <div class="date">${date}</div>
-            </div>
+          const category =
+            escapeHtml(
+              post.category || "ANALYSE"
+            );
 
-            <div class="match">
-              ${match}
-            </div>
+          const confidence =
+            escapeHtml(post.confidence);
 
-            ${
-              title
-                ? `<div class="title">${title}</div>`
-                : ""
-            }
+          const date =
+            formatDate(post.date);
 
-            <div class="info">
+          const result =
+            post.result || "pending";
 
-              <span class="badge">
-                ${category}
-              </span>
+
+          let resultText =
+            "En attente";
+
+
+          if (result === "win") {
+            resultText =
+              "Résultat positif";
+          }
+
+
+          if (result === "loss") {
+            resultText =
+              "Résultat négatif";
+          }
+
+
+          return `
+
+            <article class="post">
+
+              <div class="post-top">
+
+                <div class="sport">
+                  ${sport}
+                </div>
+
+                <div class="date">
+                  ${date}
+                </div>
+
+              </div>
+
+
+              <div class="match">
+                ${match}
+              </div>
+
 
               ${
-                confidence
-                  ? `<span class="badge confidence">
-                      Confiance : ${confidence}
-                     </span>`
+                title
+                  ? `
+                    <div class="title">
+                      ${title}
+                    </div>
+                  `
                   : ""
               }
 
-            </div>
 
-            <div class="analysis">
-              ${analysis}
-            </div>
+              <div class="info">
 
-            <div class="result ${escapeHtml(result)}">
-              ${resultText}
-            </div>
+                <span class="badge">
+                  ${category}
+                </span>
 
-          </article>
-        `;
 
-      }).join("");
+                ${
+                  confidence
+                    ? `
+                      <span class="badge confidence">
+                        Confiance : ${confidence}
+                      </span>
+                    `
+                    : ""
+                }
+
+              </div>
+
+
+              <div class="analysis">
+                ${analysis}
+              </div>
+
+
+              <div class="result ${escapeHtml(result)}">
+                ${resultText}
+              </div>
+
+            </article>
+
+          `;
+
+        }).join("");
+
     }
 
-    function filterSport(sport, button) {
+
+    /* =========================
+       FILTRE SPORT
+    ========================= */
+
+    function filterSport(
+      sport,
+      button
+    ) {
 
       currentSport = sport;
 
+
       document
-        .querySelectorAll(".sport-menu button")
-        .forEach(btn => btn.classList.remove("active"));
+        .querySelectorAll(
+          ".sport-menu button"
+        )
+        .forEach(btn =>
+          btn.classList.remove("active")
+        );
+
 
       button.classList.add("active");
 
-      document.getElementById("sportMenu")
+
+      document
+        .getElementById("sportMenu")
         .classList.remove("active");
 
-      document.getElementById("sectionTitle").textContent =
-        sport === "Toutes les analyses"
-          ? "DERNIÈRES ANALYSES"
-          : "ANALYSES — " + sport.toUpperCase();
 
-      if (sport === "Toutes les analyses") {
+      document
+        .getElementById("sectionTitle")
+        .textContent =
+          sport === "Toutes les analyses"
+            ? "DERNIÈRES ANALYSES"
+            : "ANALYSES — " +
+              sport.toUpperCase();
+
+
+      if (
+        sport ===
+        "Toutes les analyses"
+      ) {
+
         displayPosts(allPosts);
+
       } else {
-        const filtered = allPosts.filter(post =>
-          post.sport &&
-          post.sport.toLowerCase() === sport.toLowerCase()
-        );
+
+        const filtered =
+          allPosts.filter(post =>
+
+            post.sport &&
+            post.sport
+              .toLowerCase() ===
+              sport.toLowerCase()
+
+          );
 
         displayPosts(filtered);
+
       }
+
     }
+
+
+    /* =========================
+       CHARGEMENT SUPABASE
+    ========================= */
 
     async function loadPosts() {
 
-      const container = document.getElementById("posts");
+      const container =
+        document.getElementById("posts");
 
-      const { data, error } = await supabaseClient
+
+      const {
+        data,
+        error
+      } = await supabaseClient
+
         .from("posts")
+
         .select("*")
-        .order("created_at", { ascending: false });
+
+        .order(
+          "created_at",
+          {
+            ascending: false
+          }
+        );
+
 
       if (error) {
+
         console.error(error);
+
 
         container.innerHTML = `
           <div class="message">
@@ -511,14 +895,23 @@
         return;
       }
 
-      allPosts = data || [];
+
+      allPosts =
+        data || [];
+
 
       displayPosts(allPosts);
+
     }
+
+
+    /* =========================
+       LANCEMENT
+    ========================= */
 
     loadPosts();
 
   </script>
 
 </body>
-</html>
+  </html>

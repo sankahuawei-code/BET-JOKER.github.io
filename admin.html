@@ -195,7 +195,8 @@ document.getElementById("publishBtn").onclick = async () => {
     document.getElementById("publishMsg").className = "message error";
     return;
   }
-
+const {data: userData} = await db.auth.getUser();
+console.log("UTILISATEUR CONNECTÉ :", userData.user);
   const {error} = await db.from("posts").insert(data);
 
   if(error){

@@ -1,969 +1,290 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Admin - JOKER ANALYSIS</title>
 
-  <title>Admin - JOKER ANALYSIS</title>
-
-  <style>
-    * {
-      box-sizing: border-box;
-    }
-
-    body {
-      margin: 0;
-      background: #050505;
-      color: #ffffff;
-      font-family: Arial, sans-serif;
-    }
-
-    main {
-      width: 100%;
-      max-width: 900px;
-      margin: auto;
-      padding: 25px 15px 50px;
-    }
-
-    h1 {
-      color: #39ff14;
-      text-align: center;
-      margin-bottom: 30px;
-    }
-
-    h2 {
-      margin-top: 0;
-    }
-
-    .card {
-      background: #111111;
-      border: 1px solid #292929;
-      border-radius: 12px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-
-    label {
-      display: block;
-      margin-top: 12px;
-      margin-bottom: 5px;
-      color: #bbbbbb;
-    }
-
-    input,
-    textarea,
-    select {
-      width: 100%;
-      padding: 13px;
-      background: #080808;
-      color: #ffffff;
-      border: 1px solid #444444;
-      border-radius: 8px;
-      font-size: 16px;
-    }
-
-    textarea {
-      resize: vertical;
-      min-height: 180px;
-    }
-
-    input:focus,
-    textarea:focus,
-    select:focus {
-      outline: none;
-      border-color: #39ff14;
-    }
-
-    button {
-      width: 100%;
-      padding: 14px;
-      margin-top: 15px;
-      background: #39ff14;
-      color: #000000;
-      border: 0;
-      border-radius: 8px;
-      font-size: 16px;
-      font-weight: bold;
-      cursor: pointer;
-    }
-
-    button:active {
-      transform: scale(0.99);
-    }
-
-    button:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
-
-    .danger {
-      background: #b00020;
-      color: #ffffff;
-    }
-
-    .hidden {
-      display: none !important;
-    }
-
-    .message {
-      margin-top: 15px;
-      line-height: 1.5;
-    }
-
-    .success {
-      color: #39ff14;
-    }
-
-    .error {
-      color: #ff4444;
-    }
-
-    .post {
-      border-top: 1px solid #333333;
-      padding: 18px 0;
-    }
-
-    .post:first-child {
-      border-top: 0;
-    }
-
-    .small {
-      color: #888888;
-      font-size: 14px;
-    }
-
-    a {
-      color: #39ff14;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-  </style>
+<style>
+body{
+  margin:0;
+  background:#050505;
+  color:white;
+  font-family:Arial,sans-serif;
+}
+main{
+  max-width:800px;
+  margin:auto;
+  padding:25px 15px;
+}
+h1,h2{color:#39ff14}
+.card{
+  background:#111;
+  border:1px solid #333;
+  border-radius:12px;
+  padding:20px;
+  margin-bottom:20px;
+}
+input,textarea,select{
+  width:100%;
+  box-sizing:border-box;
+  padding:12px;
+  margin:7px 0 14px;
+  background:#080808;
+  color:white;
+  border:1px solid #444;
+  border-radius:7px;
+}
+textarea{min-height:150px}
+button{
+  width:100%;
+  padding:13px;
+  border:0;
+  border-radius:7px;
+  background:#39ff14;
+  color:#000;
+  font-weight:bold;
+  cursor:pointer;
+}
+.danger{background:#b00020;color:white}
+.hidden{display:none}
+.message{margin-top:12px}
+.error{color:#ff4444}
+.success{color:#39ff14}
+.post{
+  border-top:1px solid #333;
+  padding:15px 0;
+}
+small{color:#888}
+a{color:#39ff14}
+</style>
 </head>
 
 <body>
-
 <main>
 
-  <h1>JOKER ANALYSIS — ADMIN</h1>
+<h1>JOKER ANALYSIS — ADMIN</h1>
+
+<div id="login" class="card">
+<h2>Connexion</h2>
+
+<label>Email</label>
+<input id="email" type="email" placeholder="Ton adresse e-mail">
+
+<label>Mot de passe</label>
+<input id="password" type="password" placeholder="Ton mot de passe">
+
+<button id="loginBtn">SE CONNECTER</button>
+
+<p id="loginMsg" class="message"></p>
+</div>
 
 
-  <!-- CONNEXION -->
+<div id="admin" class="hidden">
 
-  <section id="loginSection" class="card">
+<div class="card">
+<h2>Publier une analyse</h2>
 
-    <h2>Connexion</h2>
+<label>Sport</label>
+<input id="sport" placeholder="Football">
 
-    <p class="small">
-      Connecte-toi avec ton compte administrateur.
-    </p>
+<label>Match / événement</label>
+<input id="match" placeholder="Marseille - Lyon">
 
-    <label for="email">
-      Adresse e-mail
-    </label>
+<label>Titre</label>
+<input id="title" placeholder="Titre de l'analyse">
 
-    <input
-      id="email"
-      type="email"
-      placeholder="Ton adresse e-mail"
-      autocomplete="email"
-    >
+<label>Date</label>
+<input id="date" type="date">
 
-    <label for="password">
-      Mot de passe
-    </label>
+<label>Confiance</label>
+<input id="confidence" placeholder="Élevée">
 
-    <input
-      id="password"
-      type="password"
-      placeholder="Ton mot de passe"
-      autocomplete="current-password"
-    >
+<label>Catégorie</label>
+<select id="category">
+<option>ANALYSE</option>
+<option>STATISTIQUES</option>
+<option>ACTUALITÉ</option>
+</select>
 
-    <button
-      id="loginButton"
-      type="button"
-    >
-      SE CONNECTER
-    </button>
+<label>Analyse</label>
+<textarea id="analysis" placeholder="Écris ton analyse ici..."></textarea>
 
-    <p
-      id="loginMessage"
-      class="message"
-    ></p>
+<button id="publishBtn">PUBLIER L'ANALYSE</button>
 
-  </section>
+<p id="publishMsg" class="message"></p>
+</div>
 
 
-  <!-- PANNEAU ADMIN -->
-
-  <section
-    id="adminPanel"
-    class="hidden"
-  >
-
-    <!-- PUBLICATION -->
-
-    <div class="card">
-
-      <h2>
-        Publier une analyse
-      </h2>
-
-      <label for="sport">
-        Sport
-      </label>
-
-      <input
-        id="sport"
-        type="text"
-        placeholder="Exemple : Football"
-      >
+<div class="card">
+<h2>Analyses publiées</h2>
+<div id="posts">Chargement...</div>
+</div>
 
 
-      <label for="match">
-        Match / événement
-      </label>
+<div class="card">
+<button id="logoutBtn" class="danger">SE DÉCONNECTER</button>
+</div>
 
-      <input
-        id="match"
-        type="text"
-        placeholder="Exemple : Marseille - Lyon"
-      >
+</div>
 
-
-      <label for="title">
-        Titre
-      </label>
-
-      <input
-        id="title"
-        type="text"
-        placeholder="Titre de l'analyse"
-      >
-
-
-      <label for="date">
-        Date
-      </label>
-
-      <input
-        id="date"
-        type="date"
-      >
-
-
-      <label for="confidence">
-        Confiance (facultatif)
-      </label>
-
-      <input
-        id="confidence"
-        type="text"
-        placeholder="Exemple : Élevée"
-      >
-
-
-      <label for="category">
-        Catégorie
-      </label>
-
-      <select id="category">
-
-        <option value="ANALYSE">
-          ANALYSE
-        </option>
-
-        <option value="STATISTIQUES">
-          STATISTIQUES
-        </option>
-
-        <option value="ACTUALITÉ">
-          ACTUALITÉ
-        </option>
-
-      </select>
-
-
-      <label for="analysis">
-        Analyse
-      </label>
-
-      <textarea
-        id="analysis"
-        placeholder="Écris ton analyse ici..."
-      ></textarea>
-
-
-      <button
-        id="publishButton"
-        type="button"
-      >
-        PUBLIER L'ANALYSE
-      </button>
-
-      <p
-        id="publishMessage"
-        class="message"
-      ></p>
-
-    </div>
-
-
-    <!-- ANALYSES EXISTANTES -->
-
-    <div class="card">
-
-      <h2>
-        Analyses publiées
-      </h2>
-
-      <div id="postsList">
-        Chargement...
-      </div>
-
-    </div>
-
-
-    <!-- DÉCONNEXION -->
-
-    <div class="card">
-
-      <button
-        id="logoutButton"
-        type="button"
-        class="danger"
-      >
-        SE DÉCONNECTER
-      </button>
-
-    </div>
-
-  </section>
-
-
-  <p>
-    <a href="index.html">
-      ← Retour au site
-    </a>
-  </p>
+<p><a href="index.html">← Retour au site</a></p>
 
 </main>
 
 
-<!-- SUPABASE -->
-
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- CONFIGURATION SUPABASE -->
-
 <script src="config.js"></script>
-
 
 <script>
 
-  /* =====================================================
-     INITIALISATION
-  ===================================================== */
+const db = supabase.createClient(
+  window.SUPABASE_URL,
+  window.SUPABASE_ANON_KEY
+);
 
-  const supabaseClient =
-    supabase.createClient(
-      window.SUPABASE_URL,
-      window.SUPABASE_ANON_KEY
-    );
+const login = document.getElementById("login");
+const admin = document.getElementById("admin");
 
+document.getElementById("loginBtn").onclick = async () => {
 
-  /* =====================================================
-     ÉLÉMENTS DE LA PAGE
-  ===================================================== */
+  const email = document.getElementById("email").value.trim();
+  const password = document.getElementById("password").value;
 
-  const loginSection =
-    document.getElementById("loginSection");
-
-  const adminPanel =
-    document.getElementById("adminPanel");
-
-  const emailInput =
-    document.getElementById("email");
-
-  const passwordInput =
-    document.getElementById("password");
-
-  const loginButton =
-    document.getElementById("loginButton");
-
-  const loginMessage =
-    document.getElementById("loginMessage");
-
-  const publishButton =
-    document.getElementById("publishButton");
-
-  const publishMessage =
-    document.getElementById("publishMessage");
-
-  const logoutButton =
-    document.getElementById("logoutButton");
-
-  const postsList =
-    document.getElementById("postsList");
-
-
-  /* =====================================================
-     CONNEXION
-  ===================================================== */
-
-  async function login() {
-
-    const email =
-      emailInput.value.trim();
-
-    const password =
-      passwordInput.value;
-
-
-    if (email === "" || password === "") {
-
-      loginMessage.textContent =
-        "Entre ton adresse e-mail et ton mot de passe.";
-
-      loginMessage.className =
-        "message error";
-
-      return;
-    }
-
-
-    loginButton.disabled = true;
-
-    loginButton.textContent =
-      "CONNEXION...";
-
-    loginMessage.textContent = "";
-
-
-    try {
-
-      const response =
-        await supabaseClient.auth.signInWithPassword({
-
-          email: email,
-
-          password: password
-
-        });
-
-
-      if (response.error) {
-
-        loginMessage.textContent =
-          "Erreur : " +
-          response.error.message;
-
-        loginMessage.className =
-          "message error";
-
-        loginButton.disabled = false;
-
-        loginButton.textContent =
-          "SE CONNECTER";
-
-        return;
-      }
-
-
-      loginMessage.textContent =
-        "Connexion réussie.";
-
-      loginMessage.className =
-        "message success";
-
-
-      showAdmin();
-
-
-    } catch (error) {
-
-      loginMessage.textContent =
-        "Impossible de contacter Supabase.";
-
-      loginMessage.className =
-        "message error";
-
-      loginButton.disabled = false;
-
-      loginButton.textContent =
-        "SE CONNECTER";
-
-    }
-
+  if(!email || !password){
+    document.getElementById("loginMsg").textContent =
+      "Entre ton email et ton mot de passe.";
+    document.getElementById("loginMsg").className = "message error";
+    return;
   }
 
+  const {error} = await db.auth.signInWithPassword({
+    email: email,
+    password: password
+  });
 
-  /* =====================================================
-     AFFICHER ADMIN
-  ===================================================== */
-
-  function showAdmin() {
-
-    loginSection.classList.add("hidden");
-
-    adminPanel.classList.remove("hidden");
-
-    loadPosts();
-
+  if(error){
+    document.getElementById("loginMsg").textContent =
+      "Erreur : " + error.message;
+    document.getElementById("loginMsg").className = "message error";
+    return;
   }
 
-
-  /* =====================================================
-     PUBLICATION
-  ===================================================== */
-
-  async function publishAnalysis() {
-
-    const sport =
-      document.getElementById("sport").value.trim();
-
-    const match =
-      document.getElementById("match").value.trim();
-
-    const title =
-      document.getElementById("title").value.trim();
-
-    const date =
-      document.getElementById("date").value || null;
-
-    const confidence =
-      document.getElementById("confidence").value.trim();
-
-    const category =
-      document.getElementById("category").value;
-
-    const analysis =
-      document.getElementById("analysis").value.trim();
+  login.classList.add("hidden");
+  admin.classList.remove("hidden");
+  loadPosts();
+};
 
 
-    if (
-      sport === "" ||
-      match === "" ||
-      analysis === ""
-    ) {
+document.getElementById("publishBtn").onclick = async () => {
 
-      publishMessage.textContent =
-        "Sport, match et analyse sont obligatoires.";
+  const data = {
+    sport: document.getElementById("sport").value.trim(),
+    match: document.getElementById("match").value.trim(),
+    title: document.getElementById("title").value.trim() || null,
+    date: document.getElementById("date").value || null,
+    confidence: document.getElementById("confidence").value.trim() || null,
+    category: document.getElementById("category").value,
+    analysis: document.getElementById("analysis").value.trim(),
+    result: "pending"
+  };
 
-      publishMessage.className =
-        "message error";
+  if(!data.sport || !data.match || !data.analysis){
+    document.getElementById("publishMsg").textContent =
+      "Sport, match et analyse sont obligatoires.";
+    document.getElementById("publishMsg").className = "message error";
+    return;
+  }
 
-      return;
-    }
+  const {error} = await db.from("posts").insert(data);
 
+  if(error){
+    document.getElementById("publishMsg").textContent =
+      "Erreur : " + error.message;
+    document.getElementById("publishMsg").className = "message error";
+    return;
+  }
 
-    publishButton.disabled = true;
+  document.getElementById("publishMsg").textContent =
+    "Analyse publiée !";
+  document.getElementById("publishMsg").className = "message success";
 
-    publishButton.textContent =
-      "PUBLICATION...";
+  document.getElementById("analysis").value = "";
 
-    publishMessage.textContent = "";
-
-
-    try {
-
-      const response =
-        await supabaseClient
-          .from("posts")
-          .insert({
-
-            sport: sport,
-
-            match: match,
-
-            title: title || null,
-
-            date: date,
-
-            confidence:
-              confidence || null,
-
-            category: category,
-
-            analysis: analysis,
-
-            result: "pending"
-
-          });
+  loadPosts();
+};
 
 
-      if (response.error) {
+async function loadPosts(){
 
-        publishMessage.textContent =
-          "Erreur : " +
-          response.error.message;
+  const {data,error} = await db
+    .from("posts")
+    .select("*")
+    .order("created_at",{ascending:false});
 
-        publishMessage.className =
-          "message error";
+  const box = document.getElementById("posts");
 
-        publishButton.disabled = false;
+  if(error){
+    box.innerHTML = "<p class='error'>" + error.message + "</p>";
+    return;
+  }
 
-        publishButton.textContent =
-          "PUBLIER L'ANALYSE";
+  if(!data.length){
+    box.innerHTML = "<small>Aucune analyse publiée.</small>";
+    return;
+  }
 
-        return;
-      }
+  box.innerHTML = "";
 
+  data.forEach(post => {
 
-      publishMessage.textContent =
-        "Analyse publiée avec succès !";
+    const div = document.createElement("div");
+    div.className = "post";
 
-      publishMessage.className =
-        "message success";
+    div.innerHTML = `
+      <h3>${post.title || "Analyse sportive"}</h3>
+      <small>${post.sport} — ${post.match}</small>
+      <p>${post.analysis}</p>
+      <button class="danger">SUPPRIMER</button>
+    `;
 
+    div.querySelector("button").onclick = async () => {
 
-      document.getElementById("sport").value = "";
+      if(!confirm("Supprimer cette analyse ?")) return;
 
-      document.getElementById("match").value = "";
-
-      document.getElementById("title").value = "";
-
-      document.getElementById("date").value = "";
-
-      document.getElementById("confidence").value = "";
-
-      document.getElementById("analysis").value = "";
-
-
-      publishButton.disabled = false;
-
-      publishButton.textContent =
-        "PUBLIER L'ANALYSE";
-
+      await db.from("posts").delete().eq("id",post.id);
 
       loadPosts();
+    };
 
+    box.appendChild(div);
+  });
+}
 
-    } catch (error) {
 
-      publishMessage.textContent =
-        "Une erreur est survenue.";
+document.getElementById("logoutBtn").onclick = async () => {
 
-      publishMessage.className =
-        "message error";
+  await db.auth.signOut();
 
-      publishButton.disabled = false;
+  admin.classList.add("hidden");
+  login.classList.remove("hidden");
+};
 
-      publishButton.textContent =
-        "PUBLIER L'ANALYSE";
 
-    }
+async function checkSession(){
 
-  }
+  const {data} = await db.auth.getSession();
 
-
-  /* =====================================================
-     CHARGER LES ANALYSES
-  ===================================================== */
-
-  async function loadPosts() {
-
-    postsList.innerHTML =
-      "Chargement...";
-
-
-    try {
-
-      const response =
-        await supabaseClient
-          .from("posts")
-          .select("*")
-          .order(
-            "created_at",
-            {
-              ascending: false
-            }
-          );
-
-
-      if (response.error) {
-
-        postsList.innerHTML =
-          '<p class="error">' +
-          escapeHtml(
-            response.error.message
-          ) +
-          '</p>';
-
-        return;
-      }
-
-
-      const posts =
-        response.data || [];
-
-
-      if (posts.length === 0) {
-
-        postsList.innerHTML =
-          '<p class="small">' +
-          'Aucune analyse publiée pour le moment.' +
-          '</p>';
-
-        return;
-      }
-
-
-      postsList.innerHTML = "";
-
-
-      posts.forEach(function(post) {
-
-        const article =
-          document.createElement("div");
-
-        article.className =
-          "post";
-
-
-        article.innerHTML = `
-
-          <h3>
-            ${escapeHtml(
-              post.title ||
-              "Analyse sportive"
-            )}
-          </h3>
-
-          <p class="small">
-            ${escapeHtml(
-              post.sport || ""
-            )}
-
-            —
-
-            ${escapeHtml(
-              post.match || ""
-            )}
-
-            ${
-              post.date
-                ? " — " +
-                  escapeHtml(post.date)
-                : ""
-            }
-          </p>
-
-          <p>
-            ${escapeHtml(
-              post.analysis || ""
-            )}
-          </p>
-
-          ${
-            post.confidence
-              ? `
-                <p class="small">
-                  Confiance :
-                  ${escapeHtml(
-                    post.confidence
-                  )}
-                </p>
-              `
-              : ""
-          }
-
-          <button
-            type="button"
-            class="danger"
-            data-id="${post.id}"
-          >
-            SUPPRIMER
-          </button>
-
-        `;
-
-
-        const deleteButton =
-          article.querySelector(
-            "button[data-id]"
-          );
-
-
-        deleteButton.addEventListener(
-          "click",
-          function() {
-
-            deletePost(post.id);
-
-          }
-        );
-
-
-        postsList.appendChild(article);
-
-      });
-
-
-    } catch (error) {
-
-      postsList.innerHTML =
-        '<p class="error">' +
-        'Erreur de chargement.' +
-        '</p>';
-
-    }
-
-  }
-
-
-  /* =====================================================
-     SUPPRESSION
-  ===================================================== */
-
-  async function deletePost(id) {
-
-    const confirmation =
-      confirm(
-        "Voulez-vous vraiment supprimer cette analyse ?"
-      );
-
-
-    if (!confirmation) {
-      return;
-    }
-
-
-    const response =
-      await supabaseClient
-        .from("posts")
-        .delete()
-        .eq("id", id);
-
-
-    if (response.error) {
-
-      alert(
-        "Erreur : " +
-        response.error.message
-      );
-
-      return;
-    }
-
-
+  if(data.session){
+    login.classList.add("hidden");
+    admin.classList.remove("hidden");
     loadPosts();
-
   }
+}
 
-
-  /* =====================================================
-     DÉCONNEXION
-  ===================================================== */
-
-  async function logout() {
-
-    await supabaseClient.auth.signOut();
-
-    adminPanel.classList.add("hidden");
-
-    loginSection.classList.remove("hidden");
-
-    passwordInput.value = "";
-
-    loginMessage.textContent = "";
-
-  }
-
-
-  /* =====================================================
-     PROTECTION HTML
-  ===================================================== */
-
-  function escapeHtml(text) {
-
-    return String(text || "")
-
-      .replace(/&/g, "&amp;")
-
-      .replace(/</g, "&lt;")
-
-      .replace(/>/g, "&gt;")
-
-      .replace(/"/g, "&quot;")
-
-      .replace(/'/g, "&#039;");
-
-  }
-
-
-  /* =====================================================
-     BOUTONS
-  ===================================================== */
-
-  loginButton.addEventListener(
-    "click",
-    login
-  );
-
-
-  publishButton.addEventListener(
-    "click",
-    publishAnalysis
-  );
-
-
-  logoutButton.addEventListener(
-    "click",
-    logout
-  );
-
-
-  /* =====================================================
-     ENTRÉE = CONNEXION
-  ===================================================== */
-
-  passwordInput.addEventListener(
-    "keydown",
-    function(event) {
-
-      if (event.key === "Enter") {
-
-        login();
-
-      }
-
-    }
-  );
-
-
-  /* =====================================================
-     VÉRIFICATION DE SESSION
-  ===================================================== */
-
-  async function checkSession() {
-
-    const response =
-      await supabaseClient.auth.getSession();
-
-
-    if (
-      response.data &&
-      response.data.session
-    ) {
-
-      showAdmin();
-
-    }
-
-  }
-
-
-  /* =====================================================
-     DÉMARRAGE
-  ===================================================== */
-
-  checkSession();
+checkSession();
 
 </script>
 
 </body>
-  </html>
+</html>

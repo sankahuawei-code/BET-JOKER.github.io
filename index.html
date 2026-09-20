@@ -16,68 +16,27 @@
       padding: 0;
     }
 
+    :root {
+      --green: #39ff14;
+      --green-soft: rgba(57, 255, 20, 0.12);
+      --black: #050505;
+      --card: #0b0b0b;
+      --border: #242424;
+      --text: #ffffff;
+      --muted: #8a8a8a;
+    }
+
     body {
-      background: #050505;
-      color: #fff;
+      background:
+        radial-gradient(
+          circle at 50% -10%,
+          rgba(57,255,20,0.07),
+          transparent 35%
+        ),
+        #050505;
+      color: var(--text);
       font-family: Arial, Helvetica, sans-serif;
       min-height: 100vh;
-    }
-
-    /* =========================
-       AVERTISSEMENT 18+
-    ========================= */
-
-    .age-warning {
-      position: fixed;
-      inset: 0;
-      background: rgba(0, 0, 0, 0.97);
-      z-index: 9999;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: 20px;
-    }
-
-    .age-box {
-      width: 100%;
-      max-width: 450px;
-      background: #0b0b0b;
-      border: 2px solid #39ff14;
-      border-radius: 12px;
-      padding: 30px 20px;
-      text-align: center;
-      box-shadow: 0 0 30px rgba(57, 255, 20, 0.25);
-    }
-
-    .age-title {
-      color: #39ff14;
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      line-height: 1.3;
-    }
-
-    .age-box p {
-      color: #ccc;
-      font-size: 14px;
-      line-height: 1.6;
-      margin-bottom: 12px;
-    }
-
-    .age-box button {
-      margin-top: 15px;
-      padding: 13px 22px;
-      background: #39ff14;
-      color: #000;
-      border: none;
-      border-radius: 6px;
-      font-weight: bold;
-      cursor: pointer;
-      font-size: 13px;
-    }
-
-    .age-box button:hover {
-      box-shadow: 0 0 15px rgba(57, 255, 20, 0.5);
     }
 
     /* =========================
@@ -87,69 +46,79 @@
     header {
       position: relative;
       text-align: center;
-      padding: 35px 20px 25px;
-      border-bottom: 1px solid rgba(57, 255, 20, 0.25);
-    }
-
-    .admin-link {
-      position: absolute;
-      top: 15px;
-      right: 18px;
-      color: #777;
-      text-decoration: none;
-      font-size: 11px;
-      letter-spacing: 1px;
-      transition: 0.2s;
-    }
-
-    .admin-link:hover {
-      color: #39ff14;
+      padding: 34px 20px 25px;
+      border-bottom: 1px solid rgba(57,255,20,0.22);
+      background: rgba(5,5,5,0.96);
     }
 
     .menu-button {
       position: absolute;
-      top: 15px;
+      top: 17px;
       left: 18px;
-      background: none;
-      border: none;
-      color: #39ff14;
-      font-size: 25px;
+      width: 40px;
+      height: 40px;
+      background: transparent;
+      border: 1px solid #242424;
+      border-radius: 8px;
+      color: var(--green);
+      font-size: 22px;
       cursor: pointer;
     }
 
+    .menu-button:hover {
+      border-color: var(--green);
+      background: var(--green-soft);
+    }
+
+    .admin-link {
+      position: absolute;
+      top: 27px;
+      right: 18px;
+      color: #666;
+      text-decoration: none;
+      font-size: 10px;
+      font-weight: bold;
+      letter-spacing: 1.2px;
+    }
+
+    .admin-link:hover {
+      color: var(--green);
+    }
+
     .logo {
-      color: #39ff14;
+      color: var(--green);
       font-size: 42px;
       font-weight: 900;
-      letter-spacing: 4px;
+      letter-spacing: 5px;
       text-shadow:
-        0 0 5px #39ff14,
-        0 0 15px rgba(57, 255, 20, 0.6);
+        0 0 6px var(--green),
+        0 0 18px rgba(57,255,20,0.45);
     }
 
     .subtitle {
       margin-top: 8px;
-      color: #aaa;
-      font-size: 13px;
-      letter-spacing: 1px;
+      color: #999;
+      font-size: 12px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
     /* =========================
-       MENU SPORTS
+       MENU
     ========================= */
 
     .sport-menu {
       display: none;
       position: absolute;
-      z-index: 20;
-      top: 55px;
+      z-index: 100;
+      top: 65px;
       left: 15px;
-      width: 210px;
-      background: #0b0b0b;
-      border: 1px solid #39ff14;
-      box-shadow: 0 0 20px rgba(57, 255, 20, 0.2);
-      border-radius: 8px;
+      width: 225px;
+      background: #0a0a0a;
+      border: 1px solid var(--green);
+      border-radius: 10px;
       overflow: hidden;
+      box-shadow: 0 0 30px rgba(57,255,20,0.15);
     }
 
     .sport-menu.active {
@@ -157,22 +126,25 @@
     }
 
     .sport-menu button {
-      display: block;
       width: 100%;
-      padding: 13px 15px;
+      padding: 14px 16px;
+      border: 0;
+      border-bottom: 1px solid #1b1b1b;
       background: transparent;
-      color: #ddd;
-      border: none;
-      border-bottom: 1px solid #191919;
+      color: #ccc;
       text-align: left;
       cursor: pointer;
       font-size: 13px;
     }
 
+    .sport-menu button:last-child {
+      border-bottom: 0;
+    }
+
     .sport-menu button:hover,
     .sport-menu button.active {
-      background: rgba(57, 255, 20, 0.08);
-      color: #39ff14;
+      color: var(--green);
+      background: var(--green-soft);
     }
 
     /* =========================
@@ -181,175 +153,316 @@
 
     main {
       width: 100%;
-      max-width: 900px;
+      max-width: 920px;
       margin: auto;
-      padding: 30px 15px 50px;
+      padding: 32px 15px 60px;
     }
 
     .section-title {
-      color: #39ff14;
-      font-size: 18px;
-      font-weight: bold;
-      margin-bottom: 20px;
-      letter-spacing: 1px;
+      margin-bottom: 22px;
+      color: var(--green);
+      font-size: 15px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
     }
 
     .posts {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 22px;
     }
 
     /* =========================
-       CARTES ANALYSES
+       CARTE ANALYSE
     ========================= */
 
     .post {
-      background: #0c0c0c;
-      border: 1px solid #202020;
-      border-left: 3px solid #39ff14;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 0 15px rgba(0, 0, 0, 0.5);
+      position: relative;
+      overflow: hidden;
+      padding: 23px;
+      background:
+        radial-gradient(
+          circle at 90% 10%,
+          rgba(57,255,20,0.08),
+          transparent 32%
+        ),
+        linear-gradient(145deg, #101010, #070707);
+      border: 1px solid #242424;
+      border-left: 4px solid var(--green);
+      border-radius: 18px;
+      box-shadow:
+        0 0 25px rgba(0,0,0,0.55),
+        inset 0 0 30px rgba(57,255,20,0.025);
+      transition: 0.25s ease;
     }
 
     .post:hover {
-      border-color: rgba(57, 255, 20, 0.55);
+      transform: translateY(-2px);
+      border-color: rgba(57,255,20,0.55);
+      box-shadow:
+        0 0 35px rgba(57,255,20,0.08),
+        inset 0 0 30px rgba(57,255,20,0.04);
     }
+
+    /* =========================
+       HAUT CARTE
+    ========================= */
 
     .post-top {
       display: flex;
-      justify-content: space-between;
       align-items: center;
-      gap: 10px;
-      margin-bottom: 12px;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 10px;
     }
 
     .sport {
-      color: #39ff14;
+      color: var(--green);
       font-size: 12px;
-      font-weight: bold;
+      font-weight: 900;
       text-transform: uppercase;
-      letter-spacing: 1px;
+      letter-spacing: 1.5px;
     }
 
     .date {
       color: #666;
-      font-size: 11px;
+      font-size: 10px;
     }
+
+    /* =========================
+       STATUT
+    ========================= */
+
+    .result {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 13px;
+      border-radius: 999px;
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .result.pending {
+      color: #fff;
+      background: #171717;
+      border: 1px solid #343434;
+    }
+
+    .result.win {
+      color: var(--green);
+      background: rgba(57,255,20,0.09);
+      border: 1px solid rgba(57,255,20,0.35);
+    }
+
+    .result.loss {
+      color: #ff5c5c;
+      background: rgba(255,75,75,0.08);
+      border: 1px solid rgba(255,75,75,0.35);
+    }
+
+    /* =========================
+       MATCH
+    ========================= */
 
     .match {
-      font-size: 20px;
-      font-weight: bold;
-      margin-bottom: 8px;
+      margin: 25px 0 17px;
+      text-align: center;
+      font-size: clamp(24px, 5vw, 39px);
+      font-weight: 900;
+      line-height: 1.1;
+      letter-spacing: -0.7px;
     }
 
+    /* =========================
+       TITRE
+    ========================= */
+
     .title {
-      color: #39ff14;
+      margin-bottom: 17px;
+      color: var(--green);
       font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 15px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: 1px;
     }
+
+    /* =========================
+       INFOS
+    ========================= */
 
     .info {
       display: flex;
       flex-wrap: wrap;
       gap: 8px;
-      margin-bottom: 15px;
+      margin-bottom: 18px;
     }
 
     .badge {
-      border: 1px solid #292929;
+      padding: 7px 10px;
       background: #111;
-      padding: 5px 9px;
-      border-radius: 4px;
-      color: #aaa;
-      font-size: 11px;
+      border: 1px solid #292929;
+      border-radius: 7px;
+      color: #999;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
 
-    .confidence {
-      color: #39ff14;
+    /* =========================
+       STAT CLÉ
+    ========================= */
+
+    .key-stat {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 15px;
+      margin: 20px 0;
+      padding: 18px;
+      background:
+        linear-gradient(
+          135deg,
+          rgba(57,255,20,0.07),
+          rgba(255,255,255,0.015)
+        );
+      border: 1px solid rgba(57,255,20,0.18);
+      border-radius: 14px;
+    }
+
+    .key-stat-left {
+      min-width: 0;
+    }
+
+    .key-stat-label {
+      margin-bottom: 6px;
+      color: #777;
+      font-size: 9px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+    }
+
+    .key-stat-player {
+      color: #fff;
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .key-stat-value {
+      color: var(--green);
+      font-size: 25px;
+      font-weight: 900;
+      white-space: nowrap;
+      text-shadow: 0 0 10px rgba(57,255,20,0.25);
+    }
+
+    /* =========================
+       CONFIANCE
+    ========================= */
+
+    .confidence-box {
+      margin: 22px 0;
+    }
+
+    .confidence-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .confidence-label {
+      color: #888;
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .confidence-value {
+      color: var(--green);
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .confidence-bar {
+      height: 8px;
+      overflow: hidden;
+      background: #181818;
+      border-radius: 999px;
+    }
+
+    .confidence-fill {
+      height: 100%;
+      min-width: 0;
+      background: var(--green);
+      border-radius: 999px;
+      box-shadow: 0 0 12px rgba(57,255,20,0.55);
+    }
+
+    /* =========================
+       ANALYSE
+    ========================= */
+
+    .analysis-box {
+      margin-top: 22px;
+      padding: 18px;
+      background: rgba(255,255,255,0.025);
+      border: 1px solid #222;
+      border-radius: 14px;
+    }
+
+    .analysis-label {
+      margin-bottom: 11px;
+      color: var(--green);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
     }
 
     .analysis {
       color: #ccc;
       font-size: 14px;
-      line-height: 1.65;
+      line-height: 1.75;
       white-space: pre-line;
     }
 
-    .result {
-      display: inline-block;
-      margin-top: 16px;
-      padding: 6px 10px;
-      border-radius: 4px;
-      font-size: 11px;
-      font-weight: bold;
-      text-transform: uppercase;
-    }
-
-    .result.pending {
-      color: #aaa;
-      border: 1px solid #333;
-      background: #111;
-    }
-
-    .result.win {
-      color: #39ff14;
-      border: 1px solid rgba(57, 255, 20, 0.4);
-      background: rgba(57, 255, 20, 0.08);
-    }
-
-    .result.loss {
-      color: #ff4b4b;
-      border: 1px solid rgba(255, 75, 75, 0.35);
-      background: rgba(255, 75, 75, 0.08);
-    }
-
     /* =========================
-       CHARGEMENT
+       MESSAGE
     ========================= */
 
     .message {
-      text-align: center;
-      padding: 40px 15px;
+      padding: 45px 15px;
       color: #777;
+      text-align: center;
       font-size: 14px;
     }
 
     .loading {
-      color: #39ff14;
+      color: var(--green);
     }
 
     /* =========================
-       PRÉVENTION
+       FOOTER
     ========================= */
 
-    .prevention-footer {
-      margin-top: 30px;
+    footer {
       padding: 30px 20px;
-      text-align: center;
-      border-top: 1px solid #222;
+      border-top: 1px solid #1d1d1d;
       background: #080808;
-      color: #888;
-      font-size: 12px;
+      color: #666;
+      text-align: center;
+      font-size: 11px;
       line-height: 1.7;
     }
 
-    .prevention-footer .warning-title {
-      color: #39ff14;
-      font-size: 14px;
-      font-weight: bold;
-      margin-bottom: 10px;
-    }
-
-    .prevention-footer p {
-      margin-top: 8px;
-    }
-
-    .prevention-footer .phone {
-      color: #39ff14;
-      font-weight: bold;
+    footer strong {
+      color: var(--green);
     }
 
     /* =========================
@@ -359,71 +472,70 @@
     @media (max-width: 600px) {
 
       header {
-        padding-top: 40px;
+        padding-top: 42px;
       }
 
       .logo {
-        font-size: 32px;
+        font-size: 31px;
         letter-spacing: 3px;
       }
 
       .subtitle {
-        font-size: 11px;
+        font-size: 9px;
+      }
+
+      .admin-link {
+        top: 25px;
+        right: 12px;
+        font-size: 8px;
+      }
+
+      .menu-button {
+        top: 13px;
+        left: 12px;
+        width: 36px;
+        height: 36px;
       }
 
       main {
-        padding-top: 25px;
+        padding: 25px 12px 45px;
       }
 
       .post {
-        padding: 16px;
+        padding: 17px;
+        border-radius: 15px;
+      }
+
+      .post-top {
+        align-items: flex-start;
       }
 
       .match {
-        font-size: 18px;
+        font-size: 25px;
+        margin: 22px 0;
+      }
+
+      .key-stat {
+        padding: 15px;
+      }
+
+      .key-stat-player {
+        font-size: 15px;
+      }
+
+      .key-stat-value {
+        font-size: 21px;
       }
 
       .analysis {
         font-size: 13px;
-      }
-
-      .age-title {
-        font-size: 18px;
+        line-height: 1.65;
       }
     }
   </style>
 </head>
 
 <body>
-
-  <!-- =========================
-       AVERTISSEMENT 18+
-  ========================= -->
-
-  <div id="age-warning" class="age-warning">
-
-    <div class="age-box">
-
-      <div class="age-title">
-        🔞 SITE INTERDIT AUX MOINS DE 18 ANS
-      </div>
-
-      <p>
-        Les jeux d'argent et les paris sportifs sont interdits aux mineurs.
-      </p>
-
-      <p>
-        Ce site contient des contenus relatifs aux paris sportifs.
-      </p>
-
-      <button onclick="closeAgeWarning()">
-        J'AI 18 ANS OU PLUS
-      </button>
-
-    </div>
-
-  </div>
-
 
   <!-- =========================
        HEADER
@@ -433,7 +545,8 @@
 
     <button
       class="menu-button"
-      onclick="toggleMenu()">
+      onclick="toggleMenu()"
+      aria-label="Ouvrir le menu">
       ☰
     </button>
 
@@ -443,7 +556,7 @@
       ESPACE ADMIN
     </a>
 
-    <!-- MENU -->
+    <!-- MENU SPORTS -->
 
     <div
       class="sport-menu"
@@ -482,7 +595,6 @@
 
     </div>
 
-
     <div class="logo">
       BETJOKER
     </div>
@@ -495,7 +607,7 @@
 
 
   <!-- =========================
-       ANALYSES
+       CONTENU
   ========================= -->
 
   <main>
@@ -520,34 +632,11 @@
 
 
   <!-- =========================
-       PRÉVENTION
+       FOOTER
   ========================= -->
 
-  <footer class="prevention-footer">
-
-    <div class="warning-title">
-      🔞 JOUER COMPORTE DES RISQUES
-    </div>
-
-    <p>
-      Les jeux d'argent et les paris sportifs sont interdits aux moins de 18 ans.
-    </p>
-
-    <p>
-      Besoin d'aide ou envie de parler de votre pratique ?
-    </p>
-
-    <p>
-      Joueurs Info Service :
-      <span class="phone">
-        09 74 75 13 13
-      </span>
-    </p>
-
-    <p>
-      Jouez avec modération. Ne misez jamais plus que ce que vous pouvez vous permettre de perdre.
-    </p>
-
+  <footer>
+    <strong>BETJOKER</strong> — Analyses et statistiques sportives
   </footer>
 
 
@@ -556,6 +645,10 @@
   ========================= -->
 
   <script>
+
+    /* =========================
+       SUPABASE
+    ========================= */
 
     const supabaseClient =
       window.supabase.createClient(
@@ -568,19 +661,6 @@
 
     let currentSport =
       "Toutes les analyses";
-
-
-    /* =========================
-       AVERTISSEMENT
-    ========================= */
-
-    function closeAgeWarning() {
-
-      document
-        .getElementById("age-warning")
-        .style.display = "none";
-
-    }
 
 
     /* =========================
@@ -649,14 +729,80 @@
 
 
     /* =========================
-       AFFICHAGE
+       STATUT
+    ========================= */
+
+    function getResultData(result) {
+
+      if (result === "win") {
+
+        return {
+          className: "win",
+          text: "RÉSULTAT CONFIRMÉ"
+        };
+
+      }
+
+      if (result === "loss") {
+
+        return {
+          className: "loss",
+          text: "RÉSULTAT NON CONFIRMÉ"
+        };
+
+      }
+
+      return {
+        className: "pending",
+        text: "EN COURS"
+      };
+
+    }
+
+
+    /* =========================
+       CONFIANCE
+    ========================= */
+
+    function getConfidence(value) {
+
+      if (
+        value === null ||
+        value === undefined ||
+        value === ""
+      ) {
+        return null;
+      }
+
+      const raw =
+        String(value)
+          .replace("%", "")
+          .replace(",", ".")
+          .trim();
+
+      const number =
+        parseFloat(raw);
+
+      if (isNaN(number)) {
+        return null;
+      }
+
+      return Math.max(
+        0,
+        Math.min(100, number)
+      );
+
+    }
+
+
+    /* =========================
+       AFFICHAGE DES ANALYSES
     ========================= */
 
     function displayPosts(posts) {
 
       const container =
         document.getElementById("posts");
-
 
       if (
         !posts ||
@@ -693,53 +839,177 @@
               post.category || "ANALYSE"
             );
 
-          const confidence =
-            escapeHtml(post.confidence);
-
           const date =
             formatDate(post.date);
+
+
+          /* STATUT */
 
           const result =
             post.result || "pending";
 
+          const resultData =
+            getResultData(result);
 
-          let resultText =
-            "En attente";
+
+          /* CONFIANCE */
+
+          const confidence =
+            getConfidence(
+              post.confidence
+            );
 
 
-          if (result === "win") {
-            resultText =
-              "Résultat positif";
+          /*
+            Les champs joueur/statistique
+            sont optionnels.
+
+            Si ces colonnes existent
+            dans Supabase, elles seront
+            automatiquement utilisées.
+          */
+
+          const player =
+            escapeHtml(
+              post.featured_player ||
+              post.featuredPlayer ||
+              ""
+            );
+
+          const team =
+            escapeHtml(
+              post.featured_team ||
+              post.featuredTeam ||
+              ""
+            );
+
+          const goals =
+            escapeHtml(
+              post.featured_goals ||
+              post.featuredGoals ||
+              ""
+            );
+
+          const assists =
+            escapeHtml(
+              post.featured_assists ||
+              post.featuredAssists ||
+              ""
+            );
+
+          const goalRatio =
+            escapeHtml(
+              post.featured_goal_ratio ||
+              post.featuredGoalRatio ||
+              ""
+            );
+
+          const decisiveRatio =
+            escapeHtml(
+              post.featured_decisive_ratio ||
+              post.featuredDecisiveRatio ||
+              ""
+            );
+
+
+          /*
+            STAT CLÉ :
+            priorité au ratio de buts,
+            puis contribution décisive,
+            puis buts/assistances.
+          */
+
+          let statValue = "";
+          let statPlayer = player;
+
+          if (goalRatio) {
+
+            statValue =
+              goalRatio;
+
+          } else if (decisiveRatio) {
+
+            statValue =
+              decisiveRatio;
+
+          } else if (goals || assists) {
+
+            const parts = [];
+
+            if (goals) {
+              parts.push(
+                goals + " but(s)"
+              );
+            }
+
+            if (assists) {
+              parts.push(
+                assists + " passe(s)"
+              );
+            }
+
+            statValue =
+              parts.join(" · ");
           }
 
 
-          if (result === "loss") {
-            resultText =
-              "Résultat négatif";
+          if (
+            !statPlayer &&
+            team
+          ) {
+            statPlayer =
+              team;
           }
+
+
+          const hasKeyStat =
+            statPlayer ||
+            statValue;
 
 
           return `
 
             <article class="post">
 
+              <!-- HAUT -->
+
               <div class="post-top">
 
-                <div class="sport">
-                  ${sport}
+                <div>
+
+                  <div class="sport">
+                    ${sport}
+                  </div>
+
+                  ${
+                    date
+                      ? `
+                        <div class="date">
+                          ${date}
+                        </div>
+                      `
+                      : ""
+                  }
+
                 </div>
 
-                <div class="date">
-                  ${date}
+
+                <div
+                  class="result ${resultData.className}">
+                  ${resultData.text}
                 </div>
 
               </div>
 
+
+              <!-- MATCH -->
 
               <div class="match">
                 ${match}
               </div>
 
+
+              <!-- TITRE -->
 
               ${
                 title
@@ -752,166 +1022,41 @@
               }
 
 
+              <!-- CATÉGORIE -->
+
               <div class="info">
 
                 <span class="badge">
                   ${category}
                 </span>
 
-
-                ${
-                  confidence
-                    ? `
-                      <span class="badge confidence">
-                        Confiance : ${confidence}
-                      </span>
-                    `
-                    : ""
-                }
-
               </div>
 
 
-              <div class="analysis">
-                ${analysis}
-              </div>
+              <!-- STAT CLÉ -->
 
+              ${
+                hasKeyStat
+                  ? `
 
-              <div class="result ${escapeHtml(result)}">
-                ${resultText}
-              </div>
+                    <div class="key-stat">
 
-            </article>
+                      <div class="key-stat-left">
 
-          `;
+                        <div class="key-stat-label">
+                          ⭐ STAT CLÉ
+                        </div>
 
-        }).join("");
+                        ${
+                          statPlayer
+                            ? `
+                              <div class="key-stat-player">
+                                ${statPlayer}
+                              </div>
+                            `
+                            : ""
+                        }
 
-    }
-
-
-    /* =========================
-       FILTRE SPORT
-    ========================= */
-
-    function filterSport(
-      sport,
-      button
-    ) {
-
-      currentSport = sport;
-
-
-      document
-        .querySelectorAll(
-          ".sport-menu button"
-        )
-        .forEach(btn =>
-          btn.classList.remove("active")
-        );
-
-
-      button.classList.add("active");
-
-
-      document
-        .getElementById("sportMenu")
-        .classList.remove("active");
-
-
-      document
-        .getElementById("sectionTitle")
-        .textContent =
-          sport === "Toutes les analyses"
-            ? "DERNIÈRES ANALYSES"
-            : "ANALYSES — " +
-              sport.toUpperCase();
-
-
-      if (
-        sport ===
-        "Toutes les analyses"
-      ) {
-
-        displayPosts(allPosts);
-
-      } else {
-
-        const filtered =
-          allPosts.filter(post =>
-
-            post.sport &&
-            post.sport
-              .toLowerCase() ===
-              sport.toLowerCase()
-
-          );
-
-        displayPosts(filtered);
-
-      }
-
-    }
-
-
-    /* =========================
-       CHARGEMENT SUPABASE
-    ========================= */
-
-    async function loadPosts() {
-
-      const container =
-        document.getElementById("posts");
-
-
-      const {
-        data,
-        error
-      } = await supabaseClient
-
-        .from("posts")
-
-        .select("*")
-
-        .order(
-          "created_at",
-          {
-            ascending: false
-          }
-        );
-
-
-      if (error) {
-
-        console.error(error);
-
-
-        container.innerHTML = `
-          <div class="message">
-            Impossible de charger les analyses.
-          </div>
-        `;
-
-        return;
-      }
-
-
-      allPosts =
-        data || [];
-
-
-      displayPosts(allPosts);
-
-    }
-
-
-    /* =========================
-       LANCEMENT
-    ========================= */
-
-    loadPosts();
-
-  </script>
-
-</body>
-  </html>
+                        ${
+                          team && statPlayer
+ 

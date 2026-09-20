@@ -18,11 +18,9 @@
 
     :root {
       --green: #39ff14;
-      --green-soft: rgba(57, 255, 20, 0.12);
+      --green-soft: rgba(57,255,20,0.12);
       --black: #050505;
-      --card: #0b0b0b;
-      --border: #242424;
-      --text: #ffffff;
+      --text: #fff;
       --muted: #8a8a8a;
     }
 
@@ -170,7 +168,7 @@
           rgba(57,255,20,0.08),
           transparent 32%
         ),
-        linear-gradient(145deg, #101010, #070707);
+        linear-gradient(145deg,#101010,#070707);
       border: 1px solid #242424;
       border-left: 4px solid var(--green);
       border-radius: 18px;
@@ -183,9 +181,6 @@
     .post:hover {
       transform: translateY(-2px);
       border-color: rgba(57,255,20,0.55);
-      box-shadow:
-        0 0 35px rgba(57,255,20,0.08),
-        inset 0 0 30px rgba(57,255,20,0.04);
     }
 
     .post-top {
@@ -218,7 +213,7 @@
       border-radius: 999px;
       font-size: 10px;
       font-weight: 900;
-      letter-spacing: 0.8px;
+      letter-spacing: .8px;
       text-transform: uppercase;
       white-space: nowrap;
     }
@@ -231,23 +226,22 @@
 
     .result.win {
       color: var(--green);
-      background: rgba(57,255,20,0.09);
-      border: 1px solid rgba(57,255,20,0.35);
+      background: rgba(57,255,20,.09);
+      border: 1px solid rgba(57,255,20,.35);
     }
 
     .result.loss {
       color: #ff5c5c;
-      background: rgba(255,75,75,0.08);
-      border: 1px solid rgba(255,75,75,0.35);
+      background: rgba(255,75,75,.08);
+      border: 1px solid rgba(255,75,75,.35);
     }
 
     .match {
       margin: 25px 0 17px;
       text-align: center;
-      font-size: clamp(24px, 5vw, 39px);
+      font-size: clamp(24px,5vw,39px);
       font-weight: 900;
       line-height: 1.1;
-      letter-spacing: -0.7px;
     }
 
     .title {
@@ -275,5 +269,632 @@
       font-size: 10px;
       font-weight: 700;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: .5px;
     }
+
+    .confidence {
+      margin: 18px 0;
+      padding: 14px;
+      background: #0d0d0d;
+      border: 1px solid #222;
+      border-radius: 10px;
+    }
+
+    .confidence-top {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 9px;
+      color: #aaa;
+      font-size: 10px;
+      font-weight: bold;
+      text-transform: uppercase;
+    }
+
+    .confidence-bar {
+      width: 100%;
+      height: 7px;
+      overflow: hidden;
+      background: #1a1a1a;
+      border-radius: 20px;
+    }
+
+    .confidence-fill {
+      height: 100%;
+      background: var(--green);
+      box-shadow: 0 0 10px rgba(57,255,20,.6);
+      border-radius: 20px;
+    }
+
+    .analysis {
+      margin-top: 15px;
+      padding: 17px;
+      background: rgba(255,255,255,.025);
+      border-left: 2px solid var(--green);
+      border-radius: 8px;
+      color: #ccc;
+      font-size: 14px;
+      line-height: 1.7;
+      white-space: pre-line;
+    }
+
+    .key-player {
+      margin: 17px 0;
+      padding: 16px;
+      background: linear-gradient(
+        135deg,
+        rgba(57,255,20,.07),
+        rgba(57,255,20,.015)
+      );
+      border: 1px solid rgba(57,255,20,.2);
+      border-radius: 12px;
+    }
+
+    .key-player-title {
+      margin-bottom: 10px;
+      color: var(--green);
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    .player-name {
+      color: #fff;
+      font-size: 18px;
+      font-weight: 900;
+    }
+
+    .player-team {
+      margin-top: 4px;
+      color: #777;
+      font-size: 11px;
+    }
+
+    .player-stats {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .player-stat {
+      padding: 7px 9px;
+      background: #0b0b0b;
+      border: 1px solid #262626;
+      border-radius: 7px;
+      color: #aaa;
+      font-size: 10px;
+    }
+
+    .empty {
+      padding: 55px 20px;
+      text-align: center;
+      color: #666;
+      border: 1px dashed #292929;
+      border-radius: 15px;
+    }
+
+    .loading {
+      padding: 40px;
+      text-align: center;
+      color: var(--green);
+    }
+
+    footer {
+      padding: 25px 15px 35px;
+      text-align: center;
+      color: #555;
+      font-size: 10px;
+      line-height: 1.6;
+      border-top: 1px solid #171717;
+    }
+
+    @media(max-width:600px) {
+      .logo {
+        font-size: 30px;
+        letter-spacing: 3px;
+      }
+
+      .subtitle {
+        font-size: 9px;
+      }
+
+      .post {
+        padding: 18px;
+      }
+
+      .post-top {
+        align-items: flex-start;
+      }
+
+      .result {
+        font-size: 8px;
+        padding: 7px 9px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+
+  <button class="menu-button" id="menuButton">☰</button>
+
+  <a class="admin-link" href="admin.html">
+    ESPACE ADMIN
+  </a>
+
+  <div class="sport-menu" id="sportMenu">
+
+    <button class="active" data-sport="all">
+      Toutes les analyses
+    </button>
+
+    <button data-sport="Football">
+      Football
+    </button>
+
+    <button data-sport="Basketball">
+      Basketball
+    </button>
+
+    <button data-sport="Tennis">
+      Tennis
+    </button>
+
+    <button data-sport="Hockey">
+      Hockey
+    </button>
+
+    <button data-sport="Rugby">
+      Rugby
+    </button>
+
+  </div>
+
+  <div class="logo">BETJOKER</div>
+
+  <div class="subtitle">
+    Analyses et statistiques sportives
+  </div>
+
+</header>
+
+<main>
+
+  <div class="section-title">
+    ANALYSES SPORTIVES
+  </div>
+
+  <div id="posts" class="posts">
+    <div class="loading">
+      Chargement des analyses...
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  BETJOKER — Analyses et statistiques sportives
+</footer>
+
+<script>
+
+  let allPosts = [];
+  let currentSport = "all";
+
+  const menuButton = document.getElementById("menuButton");
+  const sportMenu = document.getElementById("sportMenu");
+  const postsContainer = document.getElementById("posts");
+
+  menuButton.addEventListener("click", function(event) {
+    event.stopPropagation();
+    sportMenu.classList.toggle("active");
+  });
+
+  document.addEventListener("click", function(event) {
+    if (!sportMenu.contains(event.target) &&
+        event.target !== menuButton) {
+      sportMenu.classList.remove("active");
+    }
+  });
+
+  document.querySelectorAll(".sport-menu button").forEach(button => {
+
+    button.addEventListener("click", function() {
+
+      document.querySelectorAll(".sport-menu button")
+        .forEach(btn => btn.classList.remove("active"));
+
+      this.classList.add("active");
+
+      currentSport = this.dataset.sport;
+
+      sportMenu.classList.remove("active");
+
+      displayPosts();
+
+    });
+
+  });
+
+  function escapeHtml(value) {
+
+    if (value === null || value === undefined) {
+      return "";
+    }
+
+    return String(value)
+      .replace(/&/g, "&amp;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;")
+      .replace(/"/g, "&quot;")
+      .replace(/'/g, "&#039;");
+  }
+
+  function formatDate(date) {
+
+    if (!date) return "";
+
+    const d = new Date(date);
+
+    if (isNaN(d.getTime())) {
+      return escapeHtml(date);
+    }
+
+    return d.toLocaleDateString("fr-FR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric"
+    });
+  }
+
+  function getResultData(result) {
+
+    if (result === "win") {
+      return {
+        className: "win",
+        text: "CONFIRMÉ"
+      };
+    }
+
+    if (result === "loss") {
+      return {
+        className: "loss",
+        text: "NON CONFIRMÉ"
+      };
+    }
+
+    return {
+      className: "pending",
+      text: "EN COURS"
+    };
+  }
+
+  function getConfidence(value) {
+
+    if (value === null || value === undefined) {
+      return null;
+    }
+
+    let number = parseInt(
+      String(value).replace("%",""),
+      10
+    );
+
+    if (isNaN(number)) {
+      return null;
+    }
+
+    number = Math.max(0, Math.min(100, number));
+
+    return number;
+  }
+
+  function displayPosts() {
+
+    let posts = allPosts;
+
+    if (currentSport !== "all") {
+
+      posts = allPosts.filter(post =>
+        String(post.sport || "").toLowerCase() ===
+        currentSport.toLowerCase()
+      );
+
+    }
+
+    if (!posts.length) {
+
+      postsContainer.innerHTML = `
+        <div class="empty">
+          Aucune analyse publiée pour le moment.
+        </div>
+      `;
+
+      return;
+    }
+
+    postsContainer.innerHTML = posts.map(post => {
+
+      const result = getResultData(post.result);
+
+      const confidence = getConfidence(post.confidence);
+
+      const featuredPlayer =
+        post.featured_player ||
+        post.featuredPlayer ||
+        "";
+
+      const featuredTeam =
+        post.featured_team ||
+        post.featuredTeam ||
+        "";
+
+      const goals =
+        post.featured_goals ??
+        post.featuredGoals;
+
+      const assists =
+        post.featured_assists ??
+        post.featuredAssists;
+
+      const goalRatio =
+        post.featured_goal_ratio ??
+        post.featuredGoalRatio;
+
+      const decisiveRatio =
+        post.featured_decisive_ratio ??
+        post.featuredDecisiveRatio;
+
+      let playerHtml = "";
+
+      if (featuredPlayer) {
+
+        let stats = "";
+
+        if (goals !== null &&
+            goals !== undefined &&
+            goals !== "") {
+
+          stats += `
+            <div class="player-stat">
+              ⚽ ${escapeHtml(goals)} but(s)
+            </div>
+          `;
+        }
+
+        if (assists !== null &&
+            assists !== undefined &&
+            assists !== "") {
+
+          stats += `
+            <div class="player-stat">
+              🎯 ${escapeHtml(assists)} passe(s)
+            </div>
+          `;
+        }
+
+        if (goalRatio) {
+
+          stats += `
+            <div class="player-stat">
+              ⚡ ${escapeHtml(goalRatio)}
+            </div>
+          `;
+        }
+
+        if (decisiveRatio) {
+
+          stats += `
+            <div class="player-stat">
+              🔥 ${escapeHtml(decisiveRatio)}
+            </div>
+          `;
+        }
+
+        playerHtml = `
+          <div class="key-player">
+
+            <div class="key-player-title">
+              ⭐ JOUEUR À SUIVRE
+            </div>
+
+            <div class="player-name">
+              ${escapeHtml(featuredPlayer)}
+            </div>
+
+            ${
+              featuredTeam
+                ? `
+                  <div class="player-team">
+                    ${escapeHtml(featuredTeam)}
+                  </div>
+                `
+                : ""
+            }
+
+            ${
+              stats
+                ? `
+                  <div class="player-stats">
+                    ${stats}
+                  </div>
+                `
+                : ""
+            }
+
+          </div>
+        `;
+
+      }
+
+      return `
+        <article class="post">
+
+          <div class="post-top">
+
+            <div>
+
+              <div class="sport">
+                ${escapeHtml(post.sport || "SPORT")}
+              </div>
+
+              ${
+                post.date
+                  ? `
+                    <div class="date">
+                      ${formatDate(post.date)}
+                    </div>
+                  `
+                  : ""
+              }
+
+            </div>
+
+            <div class="result ${result.className}">
+              ${result.text}
+            </div>
+
+          </div>
+
+          <div class="match">
+            ${escapeHtml(post.match || "")}
+          </div>
+
+          ${
+            post.title
+              ? `
+                <div class="title">
+                  ${escapeHtml(post.title)}
+                </div>
+              `
+              : ""
+          }
+
+          <div class="info">
+
+            ${
+              post.category
+                ? `
+                  <div class="badge">
+                    ${escapeHtml(post.category)}
+                  </div>
+                `
+                : ""
+            }
+
+          </div>
+
+          ${
+            confidence !== null
+              ? `
+                <div class="confidence">
+
+                  <div class="confidence-top">
+
+                    <span>
+                      Niveau de confiance
+                    </span>
+
+                    <span>
+                      ${confidence}%
+                    </span>
+
+                  </div>
+
+                  <div class="confidence-bar">
+
+                    <div
+                      class="confidence-fill"
+                      style="width:${confidence}%"
+                    ></div>
+
+                  </div>
+
+                </div>
+              `
+              : ""
+          }
+
+          ${playerHtml}
+
+          <div class="analysis">
+            ${escapeHtml(post.analysis || "")}
+          </div>
+
+        </article>
+      `;
+
+    }).join("");
+
+  }
+
+  async function loadPosts() {
+
+    try {
+
+      if (
+        typeof window.SUPABASE_URL === "undefined" ||
+        typeof window.SUPABASE_ANON_KEY === "undefined"
+      ) {
+
+        postsContainer.innerHTML = `
+          <div class="empty">
+            Configuration Supabase introuvable.
+          </div>
+        `;
+
+        return;
+      }
+
+      const supabaseClient =
+        window.supabase.createClient(
+          window.SUPABASE_URL,
+          window.SUPABASE_ANON_KEY
+        );
+
+      const { data, error } =
+        await supabaseClient
+          .from("posts")
+          .select("*")
+          .order("created_at", {
+            ascending: false
+          });
+
+      if (error) {
+        console.error(error);
+
+        postsContainer.innerHTML = `
+          <div class="empty">
+            Impossible de charger les analyses.
+          </div>
+        `;
+
+        return;
+      }
+
+      allPosts = data || [];
+
+      displayPosts();
+
+    } catch (error) {
+
+      console.error(error);
+
+      postsContainer.innerHTML = `
+        <div class="empty">
+          Une erreur est survenue lors du chargement.
+        </div>
+      `;
+
+    }
+
+  }
+
+  loadPosts();
+
+</script>
+
+</body>
+</html>
